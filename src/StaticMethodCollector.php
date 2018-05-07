@@ -84,7 +84,6 @@ class StaticMethodCollector
                 if (
                     ! (
                         (
-                            $refReturn->isBuiltin() &&
                             'array' === $refReturn->__toString()
                         ) ||
                         (
