@@ -83,12 +83,8 @@ class StaticMethodCollector
 
                 if (
                     ! (
-                        (
-                            'array' === $refReturn->__toString()
-                        ) ||
-                        (
-                            is_a((string) $refReturn->__toString(), Traversable::class, true)
-                        )
+                        'array' === $refReturn->__toString() ||
+                        is_a((string) $refReturn->__toString(), Traversable::class, true)
                     )
                 ) {
                     continue;
