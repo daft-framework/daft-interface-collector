@@ -53,7 +53,7 @@ class StaticMethodCollector
     public function Collect(string ...$implementations) : Generator
     {
         if ($this->autoResetProcessedSources) {
-        $this->processedSources = [];
+            $this->processedSources = [];
         }
 
         yield from $this->CollectInterfaces(...$implementations);
