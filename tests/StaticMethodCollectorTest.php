@@ -49,6 +49,31 @@ class StaticMethodCollectorTest extends Base
     ) : void {
         $collector = new StaticMethodCollector($staticMethods);
 
-        $this->assertSame($expectedResult, iterator_to_array($collector->Collect(...$implementations)));
+        $collection = $collector->Collect(...$implementations);
+
+        $this->assertSame($expectedResult, iterator_to_array($collection));
+
+        $collection = $collector->Collect(...$implementations);
+
+        $this->assertSame($expectedResult, iterator_to_array($collection));
+    }
+
+    /**
+    * @dataProvider DataProviderCollection
+    */
+    public function testCollectionWithoutResettingProcessedSources(
+        array $staticMethods,
+        array $expectedResult,
+        string ...$implementations
+    ) : void {
+        $collector = new StaticMethodCollector($staticMethods, false);
+
+        $collection = $collector->Collect(...$implementations);
+
+        $this->assertSame($expectedResult, iterator_to_array($collection));
+
+        $collection = $collector->Collect(...$implementations);
+
+        $this->assertSame([], iterator_to_array($collection));
     }
 }

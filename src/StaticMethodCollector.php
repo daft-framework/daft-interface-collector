@@ -24,7 +24,12 @@ class StaticMethodCollector
     */
     private $processedSources = [];
 
-    public function __construct(array $staticMethods)
+    /**
+    * @var bool
+    */
+    private $autoResetProcessedSources;
+
+    public function __construct(array $staticMethods, bool $autoResetProcessedSources = true)
     {
         $filtered = array_map(
             /**
@@ -42,11 +47,14 @@ class StaticMethodCollector
         );
 
         $this->staticMethods = $filtered;
+        $this->autoResetProcessedSources = $autoResetProcessedSources;
     }
 
     public function Collect(string ...$implementations) : Generator
     {
+        if ($this->autoResetProcessedSources) {
         $this->processedSources = [];
+        }
 
         yield from $this->CollectInterfaces(...$implementations);
     }
@@ -54,6 +62,9 @@ class StaticMethodCollector
     protected function CollectInterfaces(string ...$implementations) : Generator
     {
         foreach (array_filter($implementations, 'class_exists') as $implementation) {
+            if (in_array($implementation, $this->processedSources, true)) {
+                continue;
+            }
             $this->processedSources[] = $implementation;
 
             /**
