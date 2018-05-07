@@ -8,7 +8,6 @@ declare(strict_types=1);
 namespace SignpostMarv\DaftInterfaceCollector;
 
 use Generator;
-use InvalidArgumentException;
 use ReflectionMethod;
 use Traversable;
 
