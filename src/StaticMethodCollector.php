@@ -191,19 +191,17 @@ class StaticMethodCollector
         * @var string[] $interfaces
         */
         foreach (
+            array_map(
+                [$this, 'FilterArrayOfInterfaces'],
             array_filter(
                 array_filter($methods, 'is_string', ARRAY_FILTER_USE_KEY),
                 $this->MakeMethodFilter($ref),
                 ARRAY_FILTER_USE_KEY
+                )
             ) as $method => $interfaces
         ) {
-            /**
-            * @var string[] $methodInterfaces
-            */
-            $methodInterfaces = $this->FilterArrayOfInterfaces($interfaces);
-
-            if (count($methodInterfaces) > 0) {
-                $filteredMethods[$method] = $methodInterfaces;
+            if (count($interfaces) > 0) {
+                $filteredMethods[$method] = $interfaces;
             }
         }
 
