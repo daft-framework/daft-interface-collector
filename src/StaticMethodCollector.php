@@ -158,36 +158,36 @@ class StaticMethodCollector
     private function MakeMethodFilter(ReflectionClass $ref) : Closure
     {
         return
-                /**
-                * @param mixed $maybe
-                */
-                function ($maybe) use ($ref) : bool {
-                    if (is_string($maybe) && $ref->hasMethod($maybe)) {
+            /**
+            * @param mixed $maybe
+            */
+            function ($maybe) use ($ref) : bool {
+                if (is_string($maybe) && $ref->hasMethod($maybe)) {
+                    /**
+                    * @var ReflectionMethod $refMethod
+                    */
+                    $refMethod = $ref->getMethod($maybe);
+
+                    if (
+                        $refMethod->isStatic() &&
+                        $refMethod->isPublic() &&
+                        0 === $refMethod->getNumberOfRequiredParameters() &&
+                        $refMethod->hasReturnType()
+                    ) {
                         /**
-                        * @var ReflectionMethod $refMethod
+                        * @var \ReflectionType $refReturn
                         */
-                        $refMethod = $ref->getMethod($maybe);
+                        $refReturn = $refMethod->getReturnType();
+                        $refReturnName = $refReturn->__toString();
 
-                        if (
-                            $refMethod->isStatic() &&
-                            $refMethod->isPublic() &&
-                            0 === $refMethod->getNumberOfRequiredParameters() &&
-                            $refMethod->hasReturnType()
-                        ) {
-                            /**
-                            * @var \ReflectionType $refReturn
-                            */
-                            $refReturn = $refMethod->getReturnType();
-                            $refReturnName = $refReturn->__toString();
-
-                            return
-                                'array' === $refReturnName ||
-                                is_a($refReturnName, Traversable::class, true);
-                        }
+                        return
+                            'array' === $refReturnName ||
+                            is_a($refReturnName, Traversable::class, true);
                     }
+                }
 
-                    return false;
-        };
+                return false;
+            };
     }
 
     /**
