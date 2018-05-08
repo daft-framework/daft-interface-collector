@@ -166,12 +166,16 @@ class StaticMethodCollector
                 */
                 $refMethod = $ref->getMethod($maybe);
 
-                if (
+            if (
+                ! (
                     $refMethod->isStatic() &&
                     $refMethod->isPublic() &&
                     0 === $refMethod->getNumberOfRequiredParameters() &&
                     $refMethod->hasReturnType()
-                ) {
+                )
+            ) {
+                return false;
+            }
                     /**
                     * @var \ReflectionType $refReturn
                     */
@@ -181,9 +185,6 @@ class StaticMethodCollector
                     return
                         'array' === $refReturnName ||
                         is_a($refReturnName, Traversable::class, true);
-                }
-
-            return false;
         };
     }
 
