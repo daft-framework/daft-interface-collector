@@ -17,7 +17,7 @@ class StaticMethodCollector
     /**
     * @var array<string, array<int, string>>
     */
-    private $staticMethods;
+    private $staticMethods = [];
 
     /**
     * @var string[]
@@ -45,11 +45,6 @@ class StaticMethodCollector
         bool $autoResetProcessedSources = true
     ) {
         /**
-        * @var array<string, array<int, string>> $filtered
-        */
-        $filtered = [];
-
-        /**
         * @var string $interface
         * @var array<string, array<int, string>> $methods
         */
@@ -64,7 +59,7 @@ class StaticMethodCollector
 
             $filteredMethods = $this->FilterMethods($ref, $methods);
             if (count($filteredMethods) > 0) {
-                $filtered[$interface] = $filteredMethods;
+                $this->staticMethods[$interface] = $filteredMethods;
             }
         }
 
@@ -75,7 +70,6 @@ class StaticMethodCollector
 
         $this->interfaces = $filteredInterfaces;
 
-        $this->staticMethods = $filtered;
         $this->autoResetProcessedSources = $autoResetProcessedSources;
     }
 
