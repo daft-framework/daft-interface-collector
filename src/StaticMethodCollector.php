@@ -193,10 +193,10 @@ class StaticMethodCollector
         foreach (
             array_map(
                 [$this, 'FilterArrayOfInterfaces'],
-            array_filter(
-                array_filter($methods, 'is_string', ARRAY_FILTER_USE_KEY),
-                $this->MakeMethodFilter($ref),
-                ARRAY_FILTER_USE_KEY
+                array_filter(
+                    array_filter($methods, 'is_string', ARRAY_FILTER_USE_KEY),
+                    $this->MakeMethodFilter($ref),
+                    ARRAY_FILTER_USE_KEY
                 )
             ) as $method => $interfaces
         ) {
