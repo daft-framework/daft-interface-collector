@@ -57,6 +57,9 @@ class StaticMethodCollector
         ) {
             $ref = new ReflectionClass($interface);
 
+            /**
+            * @var array<string, array<int, string>> $filteredMethods
+            */
             $filteredMethods = $this->FilterMethods($ref, $methods);
             if (count($filteredMethods) > 0) {
                 $this->staticMethods[$interface] = $filteredMethods;
