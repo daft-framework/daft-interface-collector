@@ -17,7 +17,7 @@ use Traversable;
 class StaticMethodCollector
 {
     /**
-    * @var array<string, array<string, array<int, string>>>
+    * @var array<string, array<string, string[]>>
     */
     private $staticMethods = [];
 
@@ -47,15 +47,14 @@ class StaticMethodCollector
         bool $autoResetProcessedSources = true
     ) {
         /**
-        * @var string $interface
-        * @var array<string, array<int, string>> $methods
+        * @var array<string, array> $filteredInterfaces
         */
-        foreach (
-            $this->FilterArrayOfInterfaces(
-                $staticMethods,
-                ARRAY_FILTER_USE_KEY
-            ) as $interface => $methods
-        ) {
+        $filteredInterfaces = $this->FilterArrayOfInterfaces(
+            array_filter($staticMethods, 'is_array'),
+            ARRAY_FILTER_USE_KEY
+        );
+
+        foreach ($filteredInterfaces as $interface => $methods) {
             $filteredMethods = $this->FilterMethods(new ReflectionClass($interface), $methods);
             if (count($filteredMethods) > 0) {
                 $this->staticMethods[$interface] = $filteredMethods;
@@ -181,14 +180,19 @@ class StaticMethodCollector
     }
 
     /**
-    * @param array<string, array<int, string>> $methods
-    *
-    * @return array<string, array<int, string>>
+    * @return array<string, string[]>
     */
     private function FilterMethods(ReflectionClass $ref, array $methods) : array
     {
+        /**
+        * @var array<string, string[]> $filteredMethods
+        */
         $filteredMethods = [];
 
+        /**
+        * @var string $method
+        * @var string[] $interfaces
+        */
         foreach (
             array_filter(
                 array_filter($methods, 'is_string', ARRAY_FILTER_USE_KEY),
@@ -196,6 +200,9 @@ class StaticMethodCollector
                 ARRAY_FILTER_USE_KEY
             ) as $method => $interfaces
         ) {
+            /**
+            * @var string[] $methodInterfaces
+            */
             $methodInterfaces = $this->FilterArrayOfInterfaces($interfaces);
 
             if (count($methodInterfaces) > 0) {
