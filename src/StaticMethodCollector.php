@@ -55,8 +55,7 @@ class StaticMethodCollector
                 ARRAY_FILTER_USE_KEY
             ) as $interface => $methods
         ) {
-            $filteredMethods[$interface] =
-                $this->FilterMethods($interface, $methods);
+            $filteredMethods[$interface] = $this->FilterMethods($interface, $methods);
         }
 
         /**
