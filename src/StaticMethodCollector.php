@@ -184,9 +184,6 @@ class StaticMethodCollector
     */
     private function FilterMethods(ReflectionClass $ref, array $methods) : array
     {
-        /**
-        * @var array<string, string[]> $filteredMethods
-        */
         $filteredMethods = [];
 
         /**
