@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace SignpostMarv\DaftInterfaceCollector;
 
+use Closure;
 use Generator;
 use ReflectionClass;
 use ReflectionMethod;
@@ -154,18 +155,9 @@ class StaticMethodCollector
         return is_string($maybe) && interface_exists($maybe);
     }
 
-    /**
-    * @param array<string, array<int, string>> $methods
-    *
-    * @return array<string, array<int, string>>
-    */
-    private function FilterMethods(ReflectionClass $ref, array $methods) : array
+    private function MakeMethodFilter(ReflectionClass $ref) : Closure
     {
-        $filteredMethods = [];
-
-        foreach (
-            array_filter(
-                $methods,
+        return
                 /**
                 * @param mixed $maybe
                 */
@@ -195,7 +187,22 @@ class StaticMethodCollector
                     }
 
                     return false;
-                },
+        };
+    }
+
+    /**
+    * @param array<string, array<int, string>> $methods
+    *
+    * @return array<string, array<int, string>>
+    */
+    private function FilterMethods(ReflectionClass $ref, array $methods) : array
+    {
+        $filteredMethods = [];
+
+        foreach (
+            array_filter(
+                $methods,
+                $this->MakeMethodFilter($ref),
                 ARRAY_FILTER_USE_KEY
             ) as $method => $interfaces
         ) {
