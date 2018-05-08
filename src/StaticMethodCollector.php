@@ -51,9 +51,8 @@ class StaticMethodCollector
         * @var array<string, array<int, string>> $methods
         */
         foreach (
-            array_filter(
+            $this->FilterArrayOfInterfaces(
                 $staticMethods,
-                [$this, 'shouldContainInterfaces'],
                 ARRAY_FILTER_USE_KEY
             ) as $interface => $methods
         ) {
@@ -68,7 +67,7 @@ class StaticMethodCollector
         /**
         * @var string[] $filteredInterfaces
         */
-        $filteredInterfaces = array_filter($interfaces, [$this, 'shouldContainInterfaces']);
+        $filteredInterfaces = $this->FilterArrayOfInterfaces($interfaces);
 
         $this->interfaces = $filteredInterfaces;
 
@@ -149,11 +148,13 @@ class StaticMethodCollector
     }
 
     /**
-    * @param mixed $maybe
+    * @return string[]|array<string, mixed>
     */
-    protected function shouldContainInterfaces($maybe) : bool
+    private function FilterArrayOfInterfaces(array $interfaces, int $flag = 0) : array
     {
-        return is_string($maybe) && interface_exists($maybe);
+        $strings = array_filter($interfaces, 'is_string', $flag);
+
+        return array_filter($strings, 'interface_exists', $flag);
     }
 
     private function MakeMethodFilter(ReflectionClass $ref) : Closure
@@ -197,7 +198,7 @@ class StaticMethodCollector
                 ARRAY_FILTER_USE_KEY
             ) as $method => $interfaces
         ) {
-            $methodInterfaces = array_filter($interfaces, [$this, 'shouldContainInterfaces']);
+            $methodInterfaces = $this->FilterArrayOfInterfaces($interfaces);
 
             if (count($methodInterfaces) > 0) {
                 $filteredMethods[$method] = $interfaces;
