@@ -57,9 +57,6 @@ class StaticMethodCollector
         ) {
             $ref = new ReflectionClass($interface);
 
-            /**
-            * @var array<string, array<int, string>> $filteredMethods
-            */
             $filteredMethods = $this->FilterMethods($ref, $methods);
             if (count($filteredMethods) > 0) {
                 $this->staticMethods[$interface] = $filteredMethods;
@@ -159,10 +156,15 @@ class StaticMethodCollector
 
     /**
     * @param array<string, array<int, string>> $methods
+    *
+    * @return array<string, array<int, string>>
     */
     private function FilterMethods(ReflectionClass $ref, array $methods) : array
     {
-        $methods = array_filter(
+        $filteredMethods = [];
+
+        foreach (
+            array_filter(
             $methods,
             /**
             * @param mixed $maybe
@@ -195,13 +197,15 @@ class StaticMethodCollector
                 return false;
             },
             ARRAY_FILTER_USE_KEY
-        );
+            ) as $method => $interfaces
+        ) {
+            $methodInterfaces = array_filter($interfaces, [$this, 'shouldContainInterfaces']);
 
-        return array_map(
-            function (array $methodInterfaces) : array {
-                return array_filter($methodInterfaces, [$this, 'shouldContainInterfaces']);
-            },
-            $methods
-        );
+            if (count($methodInterfaces) > 0) {
+                $filteredMethods[$method] = $interfaces;
+            }
+        }
+
+        return $filteredMethods;
     }
 }
