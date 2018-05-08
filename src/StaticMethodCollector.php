@@ -39,12 +39,12 @@ class StaticMethodCollector
     /**
     * @var bool
     */
-    private $autoResetProcessedSources;
+    private $autoReset;
 
     public function __construct(
         array $staticMethods,
         array $interfaces,
-        bool $autoResetProcessedSources = true
+        bool $autoReset = true
     ) {
         $filteredMethods = [];
 
@@ -76,12 +76,12 @@ class StaticMethodCollector
 
         $this->interfaces = $filteredInterfaces;
 
-        $this->autoResetProcessedSources = $autoResetProcessedSources;
+        $this->autoReset = $autoReset;
     }
 
     public function Collect(string ...$implementations) : Generator
     {
-        if ($this->autoResetProcessedSources) {
+        if ($this->autoReset) {
             $this->processedSources = [];
             $this->alreadyYielded = [];
         }
