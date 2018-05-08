@@ -11,6 +11,7 @@ use Closure;
 use Generator;
 use ReflectionClass;
 use ReflectionMethod;
+use ReflectionType;
 use Traversable;
 
 class StaticMethodCollector
@@ -166,21 +167,18 @@ class StaticMethodCollector
 
     private function FilterReflectionMethod(ReflectionMethod $refMethod) : bool
     {
-            if (
-                ! (
+        $refReturn = $refMethod->getReturnType();
+
+        return
                     $refMethod->isStatic() &&
                     $refMethod->isPublic() &&
                     0 === $refMethod->getNumberOfRequiredParameters() &&
-                    $refMethod->hasReturnType()
-                )
-            ) {
-                return false;
-            }
+            ($refReturn instanceof ReflectionType) &&
+            $this->FilterReflectionReturnType($refReturn);
+    }
 
-            /**
-            * @var \ReflectionType $refReturn
-            */
-            $refReturn = $refMethod->getReturnType();
+    private function FilterReflectionReturnType(ReflectionType $refReturn) : bool
+    {
             $refReturnName = $refReturn->__toString();
 
             return 'array' === $refReturnName || is_a($refReturnName, Traversable::class, true);
