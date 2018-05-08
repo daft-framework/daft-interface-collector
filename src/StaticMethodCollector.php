@@ -96,61 +96,6 @@ class StaticMethodCollector
         $this->autoResetProcessedSources = $autoResetProcessedSources;
     }
 
-    /**
-    * @param array<string, array<int, string>> $methods
-    */
-    private function FilterMethods(ReflectionClass $ref, array $methods) : array
-    {
-        $methods = array_filter(
-            $methods,
-            /**
-            * @param mixed $maybe
-            */
-            function ($maybe) use ($ref) : bool {
-                if (is_string($maybe) && $ref->hasMethod($maybe)) {
-                    /**
-                    * @var ReflectionMethod $refMethod
-                    */
-                    $refMethod = $ref->getMethod($maybe);
-
-                    if (
-                        $refMethod->isStatic() &&
-                        $refMethod->isPublic() &&
-                        0 === $refMethod->getNumberOfRequiredParameters() &&
-                        $refMethod->hasReturnType()
-                    ) {
-                        /**
-                        * @var \ReflectionType $refReturn
-                        */
-                        $refReturn = $refMethod->getReturnType();
-
-                        return
-                            'array' === $refReturn->__toString() ||
-                            is_a((string) $refReturn->__toString(), Traversable::class, true);
-                    }
-                }
-
-                return false;
-            },
-            ARRAY_FILTER_USE_KEY
-        );
-
-        return array_map(
-            function (array $methodInterfaces) : array {
-                return array_filter(
-                    $methodInterfaces,
-                    /**
-                    * @param mixed $maybe
-                    */
-                    function ($maybe) : bool {
-                        return is_string($maybe) && interface_exists($maybe);
-                    }
-                );
-            },
-            $methods
-        );
-    }
-
     public function Collect(string ...$implementations) : Generator
     {
         if ($this->autoResetProcessedSources) {
@@ -235,5 +180,60 @@ class StaticMethodCollector
     protected function shouldContainInterfaces($maybe) : bool
     {
         return is_string($maybe) && interface_exists($maybe);
+    }
+
+    /**
+    * @param array<string, array<int, string>> $methods
+    */
+    private function FilterMethods(ReflectionClass $ref, array $methods) : array
+    {
+        $methods = array_filter(
+            $methods,
+            /**
+            * @param mixed $maybe
+            */
+            function ($maybe) use ($ref) : bool {
+                if (is_string($maybe) && $ref->hasMethod($maybe)) {
+                    /**
+                    * @var ReflectionMethod $refMethod
+                    */
+                    $refMethod = $ref->getMethod($maybe);
+
+                    if (
+                        $refMethod->isStatic() &&
+                        $refMethod->isPublic() &&
+                        0 === $refMethod->getNumberOfRequiredParameters() &&
+                        $refMethod->hasReturnType()
+                    ) {
+                        /**
+                        * @var \ReflectionType $refReturn
+                        */
+                        $refReturn = $refMethod->getReturnType();
+
+                        return
+                            'array' === $refReturn->__toString() ||
+                            is_a((string) $refReturn->__toString(), Traversable::class, true);
+                    }
+                }
+
+                return false;
+            },
+            ARRAY_FILTER_USE_KEY
+        );
+
+        return array_map(
+            function (array $methodInterfaces) : array {
+                return array_filter(
+                    $methodInterfaces,
+                    /**
+                    * @param mixed $maybe
+                    */
+                    function ($maybe) : bool {
+                        return is_string($maybe) && interface_exists($maybe);
+                    }
+                );
+            },
+            $methods
+        );
     }
 }
