@@ -46,17 +46,18 @@ class StaticMethodCollector
         array $interfaces,
         bool $autoResetProcessedSources = true
     ) {
-        /**
-        * @var array<string, array> $filteredInterfaces
-        */
-        $filteredInterfaces = $this->FilterArrayOfInterfaces(
-            array_filter($staticMethods, 'is_array'),
-            ARRAY_FILTER_USE_KEY
-        );
-
         $filteredMethods = [];
 
-        foreach ($filteredInterfaces as $interface => $methods) {
+        /**
+        * @var string $interface
+        * @var array<string, string[]> $methods
+        */
+        foreach (
+            $this->FilterArrayOfInterfaces(
+                array_filter($staticMethods, 'is_array'),
+                ARRAY_FILTER_USE_KEY
+            ) as $interface => $methods
+        ) {
             $filteredMethods[$interface] =
                 $this->FilterMethods(new ReflectionClass($interface), $methods);
         }
