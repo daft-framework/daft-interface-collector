@@ -46,11 +46,11 @@ class StaticMethodCollector
         /**
         * @var array<string, array> $filteredMethods
         */
-        $filteredMethods = $this->FilterArrayOfInterfaceOffsets(
-            array_filter($staticMethods, 'is_array')
-        );
+        $filteredMethods = [];
 
-        foreach ($filteredMethods as $interface => $methods) {
+        foreach (
+            $this->FilterArrayOfInterfaceOffsets($staticMethods) as $interface => $methods
+        ) {
             $filteredMethods[$interface] = $this->FilterMethods($interface, $methods);
         }
 
@@ -155,16 +155,16 @@ class StaticMethodCollector
     }
 
     /**
-    * @return array<string, mixed>
+    * @return array<string, array>
     */
     private function FilterArrayOfInterfaceOffsets(array $interfaces) : array
     {
         /**
-        * @var array<string, mixed> $strings
+        * @var array<string, array> $strings
         */
         $strings = $this->FilterArrayOfInterfaces($interfaces, ARRAY_FILTER_USE_KEY);
 
-        return $strings;
+        return array_filter($strings, 'is_array');
     }
 
     private function MakeMethodFilter(string $interface) : Closure
