@@ -50,9 +50,7 @@ class StaticMethodCollector
             * @param mixed $maybe
             */
             function ($maybe) : bool {
-                return
-                    is_string($maybe) &&
-                    interface_exists($maybe);
+                return is_string($maybe) && interface_exists($maybe);
             },
             ARRAY_FILTER_USE_KEY
         );
@@ -136,9 +134,7 @@ class StaticMethodCollector
             * @param mixed $maybe
             */
             function ($maybe) : bool {
-                return
-                    is_string($maybe) &&
-                    interface_exists($maybe);
+                return is_string($maybe) && interface_exists($maybe);
             }
         );
 
