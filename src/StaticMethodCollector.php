@@ -184,9 +184,7 @@ class StaticMethodCollector
             $refReturn = $refMethod->getReturnType();
             $refReturnName = $refReturn->__toString();
 
-            return
-                'array' === $refReturnName ||
-                is_a($refReturnName, Traversable::class, true);
+            return 'array' === $refReturnName || is_a($refReturnName, Traversable::class, true);
         };
     }
 
