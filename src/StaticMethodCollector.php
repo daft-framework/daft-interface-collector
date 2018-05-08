@@ -165,38 +165,38 @@ class StaticMethodCollector
 
         foreach (
             array_filter(
-            $methods,
-            /**
-            * @param mixed $maybe
-            */
-            function ($maybe) use ($ref) : bool {
-                if (is_string($maybe) && $ref->hasMethod($maybe)) {
-                    /**
-                    * @var ReflectionMethod $refMethod
-                    */
-                    $refMethod = $ref->getMethod($maybe);
-
-                    if (
-                        $refMethod->isStatic() &&
-                        $refMethod->isPublic() &&
-                        0 === $refMethod->getNumberOfRequiredParameters() &&
-                        $refMethod->hasReturnType()
-                    ) {
+                $methods,
+                /**
+                * @param mixed $maybe
+                */
+                function ($maybe) use ($ref) : bool {
+                    if (is_string($maybe) && $ref->hasMethod($maybe)) {
                         /**
-                        * @var \ReflectionType $refReturn
+                        * @var ReflectionMethod $refMethod
                         */
-                        $refReturn = $refMethod->getReturnType();
-                        $refReturnName = $refReturn->__toString();
+                        $refMethod = $ref->getMethod($maybe);
 
-                        return
-                            'array' === $refReturnName ||
-                            is_a($refReturnName, Traversable::class, true);
+                        if (
+                            $refMethod->isStatic() &&
+                            $refMethod->isPublic() &&
+                            0 === $refMethod->getNumberOfRequiredParameters() &&
+                            $refMethod->hasReturnType()
+                        ) {
+                            /**
+                            * @var \ReflectionType $refReturn
+                            */
+                            $refReturn = $refMethod->getReturnType();
+                            $refReturnName = $refReturn->__toString();
+
+                            return
+                                'array' === $refReturnName ||
+                                is_a($refReturnName, Traversable::class, true);
+                        }
                     }
-                }
 
-                return false;
-            },
-            ARRAY_FILTER_USE_KEY
+                    return false;
+                },
+                ARRAY_FILTER_USE_KEY
             ) as $method => $interfaces
         ) {
             $methodInterfaces = array_filter($interfaces, [$this, 'shouldContainInterfaces']);
