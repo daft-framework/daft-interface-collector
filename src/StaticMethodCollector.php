@@ -158,11 +158,8 @@ class StaticMethodCollector
     private function MakeMethodFilter(ReflectionClass $ref) : Closure
     {
         return
-            /**
-            * @param mixed $maybe
-            */
-            function ($maybe) use ($ref) : bool {
-                if (is_string($maybe) && $ref->hasMethod($maybe)) {
+            function (string $maybe) use ($ref) : bool {
+                if ($ref->hasMethod($maybe)) {
                     /**
                     * @var ReflectionMethod $refMethod
                     */
@@ -201,7 +198,7 @@ class StaticMethodCollector
 
         foreach (
             array_filter(
-                $methods,
+                array_filter($methods, 'is_string', ARRAY_FILTER_USE_KEY),
                 $this->MakeMethodFilter($ref),
                 ARRAY_FILTER_USE_KEY
             ) as $method => $interfaces
