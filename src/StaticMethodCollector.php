@@ -75,10 +75,7 @@ class StaticMethodCollector
         /**
         * @var string[] $filteredInterfaces
         */
-        $filteredInterfaces = array_filter(
-            $interfaces,
-            [$this, 'shouldContainInterfaces']
-        );
+        $filteredInterfaces = array_filter($interfaces, [$this, 'shouldContainInterfaces']);
 
         $this->interfaces = $filteredInterfaces;
 
@@ -214,10 +211,7 @@ class StaticMethodCollector
 
         return array_map(
             function (array $methodInterfaces) : array {
-                return array_filter(
-                    $methodInterfaces,
-                    [$this, 'shouldContainInterfaces']
-                );
+                return array_filter($methodInterfaces, [$this, 'shouldContainInterfaces']);
             },
             $methods
         );
