@@ -187,7 +187,7 @@ class StaticMethodCollector
             foreach ($interfaces as $interface) {
                 if (is_a($implementation, $interface, true)) {
                     /**
-                    * @var string[] $types
+                    * @var array<int, string> $types
                     */
                     foreach ($this->staticMethods[$interface] as $method => $types) {
                         /**
