@@ -90,11 +90,6 @@ class StaticMethodCollector
             $this->alreadyYielded = [];
         }
 
-        if ($this->autoResetProcessedSources) {
-            $this->processedSources = [];
-            $this->alreadyYielded = [];
-        }
-
         yield from $this->CollectInterfaces(...$implementations);
     }
 
