@@ -50,9 +50,7 @@ class StaticMethodCollector
         /**
         * @var array<string, string[]> $methods
         */
-        foreach (
-            $filteredMethods as $interface => $methods
-        ) {
+        foreach ($filteredMethods as $interface => $methods) {
             $filteredMethods[$interface] = $this->FilterMethods($interface, $methods);
         }
 
