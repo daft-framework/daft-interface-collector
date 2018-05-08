@@ -56,9 +56,7 @@ class StaticMethodCollector
                 ARRAY_FILTER_USE_KEY
             ) as $interface => $methods
         ) {
-            $ref = new ReflectionClass($interface);
-
-            $filteredMethods = $this->FilterMethods($ref, $methods);
+            $filteredMethods = $this->FilterMethods(new ReflectionClass($interface), $methods);
             if (count($filteredMethods) > 0) {
                 $this->staticMethods[$interface] = $filteredMethods;
             }
