@@ -43,13 +43,13 @@ class StaticMethodCollector
 
     public function __construct(array $staticMethods, array $interfaces, bool $autoReset = true)
     {
+        /**
+        * @var array<string, array> $filteredMethods
+        */
         $filteredMethods = $this->FilterArrayOfInterfaceOffsets(
             array_filter($staticMethods, 'is_array')
         );
 
-        /**
-        * @var array<string, string[]> $methods
-        */
         foreach ($filteredMethods as $interface => $methods) {
             $filteredMethods[$interface] = $this->FilterMethods($interface, $methods);
         }
