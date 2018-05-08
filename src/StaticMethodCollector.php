@@ -15,7 +15,7 @@ use Traversable;
 class StaticMethodCollector
 {
     /**
-    * @var array<string, array<int, string>>
+    * @var array<string, array<string, array<int, string>>>
     */
     private $staticMethods = [];
 
