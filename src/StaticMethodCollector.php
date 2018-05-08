@@ -62,15 +62,11 @@ class StaticMethodCollector
         ) {
             $ref = new ReflectionClass($interface);
 
-            $filtered[$interface] = $this->FilterMethods($ref, $methods);
+            $filteredMethods = $this->FilterMethods($ref, $methods);
+            if (count($filteredMethods) > 0) {
+                $filtered[$interface] = $filteredMethods;
+            }
         }
-
-        /**
-        * @var array<string, array<int, string>> $filtered
-        */
-        $filtered = array_filter($filtered, function (array $methods) : bool {
-            return count($methods) > 0;
-        });
 
         /**
         * @var string[] $filteredInterfaces
