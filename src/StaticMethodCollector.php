@@ -203,7 +203,7 @@ class StaticMethodCollector
             $methodInterfaces = $this->FilterArrayOfInterfaces($interfaces);
 
             if (count($methodInterfaces) > 0) {
-                $filteredMethods[$method] = $interfaces;
+                $filteredMethods[$method] = $methodInterfaces;
             }
         }
 
