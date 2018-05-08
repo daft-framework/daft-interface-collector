@@ -67,7 +67,41 @@ class StaticMethodCollector
         foreach ($staticMethods as $interface => $methods) {
             $ref = new ReflectionClass($interface);
 
-            $filtered[$interface] = array_filter(
+            $filtered[$interface] = $this->FilterMethods($ref, $methods);
+        }
+
+        /**
+        * @var array<string, array<int, string>> $filtered
+        */
+        $filtered = array_filter($filtered, function (array $methods) : bool {
+            return count($methods) > 0;
+        });
+
+        /**
+        * @var string[] $filteredInterfaces
+        */
+        $filteredInterfaces = array_filter(
+            $interfaces,
+            /**
+            * @param mixed $maybe
+            */
+            function ($maybe) : bool {
+                return is_string($maybe) && interface_exists($maybe);
+            }
+        );
+
+        $this->interfaces = $filteredInterfaces;
+
+        $this->staticMethods = $filtered;
+        $this->autoResetProcessedSources = $autoResetProcessedSources;
+    }
+
+    /**
+    * @param array<string, array<int, string>> $methods
+    */
+    private function FilterMethods(ReflectionClass $ref, array $methods) : array
+    {
+            $methods = array_filter(
                 $methods,
                 /**
                 * @param mixed $maybe
@@ -101,7 +135,7 @@ class StaticMethodCollector
                 ARRAY_FILTER_USE_KEY
             );
 
-            $filtered[$interface] = array_map(
+        return array_map(
                 function (array $methodInterfaces) : array {
                     return array_filter(
                         $methodInterfaces,
@@ -113,34 +147,8 @@ class StaticMethodCollector
                         }
                     );
                 },
-                $filtered[$interface]
+                $methods
             );
-        }
-
-        /**
-        * @var array<string, array<int, string>> $filtered
-        */
-        $filtered = array_filter($filtered, function (array $methods) : bool {
-            return count($methods) > 0;
-        });
-
-        /**
-        * @var string[] $filteredInterfaces
-        */
-        $filteredInterfaces = array_filter(
-            $interfaces,
-            /**
-            * @param mixed $maybe
-            */
-            function ($maybe) : bool {
-                return is_string($maybe) && interface_exists($maybe);
-            }
-        );
-
-        $this->interfaces = $filteredInterfaces;
-
-        $this->staticMethods = $filtered;
-        $this->autoResetProcessedSources = $autoResetProcessedSources;
     }
 
     public function Collect(string ...$implementations) : Generator
