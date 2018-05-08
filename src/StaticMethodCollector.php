@@ -48,9 +48,7 @@ class StaticMethodCollector
         */
         $filteredMethods = [];
 
-        foreach (
-            $this->FilterArrayOfInterfaceOffsets($staticMethods) as $interface => $methods
-        ) {
+        foreach ($this->FilterArrayOfInterfaceOffsets($staticMethods) as $interface => $methods) {
             $filteredMethods[$interface] = $this->FilterMethods($interface, $methods);
         }
 
