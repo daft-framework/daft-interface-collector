@@ -85,7 +85,6 @@ class StaticMethodCollector
                             0 === $refMethod->getNumberOfRequiredParameters() &&
                             $refMethod->hasReturnType()
                         ) {
-
                             /**
                             * @var \ReflectionType $refReturn
                             */
@@ -191,7 +190,6 @@ class StaticMethodCollector
                     * @var string[] $types
                     */
                     foreach ($this->staticMethods[$interface] as $method => $types) {
-
                         /**
                         * @var iterable<string> $methodResult
                         */
