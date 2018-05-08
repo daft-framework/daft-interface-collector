@@ -54,12 +54,19 @@ class StaticMethodCollector
             ARRAY_FILTER_USE_KEY
         );
 
+        $filteredMethods = [];
+
         foreach ($filteredInterfaces as $interface => $methods) {
-            $filteredMethods = $this->FilterMethods(new ReflectionClass($interface), $methods);
-            if (count($filteredMethods) > 0) {
-                $this->staticMethods[$interface] = $filteredMethods;
-            }
+            $filteredMethods[$interface] =
+                $this->FilterMethods(new ReflectionClass($interface), $methods);
         }
+
+        /**
+        * @var array<string, array<string, string[]>> $filteredMethods
+        */
+        $filteredMethods = $this->FilterNonZeroArray($filteredMethods);
+
+        $this->staticMethods = $filteredMethods;
 
         /**
         * @var string[] $filteredInterfaces
@@ -184,27 +191,31 @@ class StaticMethodCollector
     */
     private function FilterMethods(ReflectionClass $ref, array $methods) : array
     {
-        $filteredMethods = [];
-
         /**
-        * @var string $method
-        * @var string[] $interfaces
+        * @var array<string, string[]>
         */
-        foreach (
-            array_map(
+        $filteredMethods = $this->FilterNonZeroArray(array_map(
                 [$this, 'FilterArrayOfInterfaces'],
                 array_filter(
                     array_filter($methods, 'is_string', ARRAY_FILTER_USE_KEY),
                     $this->MakeMethodFilter($ref),
                     ARRAY_FILTER_USE_KEY
                 )
-            ) as $method => $interfaces
-        ) {
-            if (count($interfaces) > 0) {
-                $filteredMethods[$method] = $interfaces;
-            }
-        }
+        ));
 
         return $filteredMethods;
+    }
+
+    /**
+    * @var array[]
+    */
+    private function FilterNonZeroArray(array $in) : array
+    {
+        return array_filter(
+            $in,
+            function (array $val) : bool {
+                return count($val) > 0;
+            }
+        );
     }
 }
