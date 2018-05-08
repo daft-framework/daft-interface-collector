@@ -158,7 +158,9 @@ class StaticMethodCollector
     private function MakeMethodFilter(ReflectionClass $ref) : Closure
     {
         return function (string $maybe) use ($ref) : bool {
-            if ($ref->hasMethod($maybe)) {
+            if ( ! $ref->hasMethod($maybe)) {
+                return false;
+            }
                 /**
                 * @var ReflectionMethod $refMethod
                 */
@@ -180,7 +182,6 @@ class StaticMethodCollector
                         'array' === $refReturnName ||
                         is_a($refReturnName, Traversable::class, true);
                 }
-            }
 
             return false;
         };
