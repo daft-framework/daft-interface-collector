@@ -56,7 +56,7 @@ class StaticMethodCollector
             ) as $interface => $methods
         ) {
             $filteredMethods[$interface] =
-                $this->FilterMethods(new ReflectionClass($interface), $methods);
+                $this->FilterMethods($interface, $methods);
         }
 
         /**
@@ -159,9 +159,11 @@ class StaticMethodCollector
         return array_filter($strings, 'interface_exists', $flag);
     }
 
-    private function MakeMethodFilter(ReflectionClass $ref) : Closure
+    private function MakeMethodFilter(string $interface) : Closure
     {
-        return function (string $maybe) use ($ref) : bool {
+        return function (string $maybe) use ($interface) : bool {
+            $ref = new ReflectionClass($interface);
+
             return
                 $ref->hasMethod($maybe) &&
                 $this->FilterReflectionMethod($ref->getMethod($maybe));
@@ -187,7 +189,7 @@ class StaticMethodCollector
     /**
     * @return array<string, string[]>
     */
-    private function FilterMethods(ReflectionClass $ref, array $methods) : array
+    private function FilterMethods(string $interface, array $methods) : array
     {
         /**
         * @var array<string, string[]>
@@ -196,7 +198,7 @@ class StaticMethodCollector
             [$this, 'FilterArrayOfInterfaces'],
             array_filter(
                 array_filter($methods, 'is_string', ARRAY_FILTER_USE_KEY),
-                $this->MakeMethodFilter($ref),
+                $this->MakeMethodFilter($interface),
                 ARRAY_FILTER_USE_KEY
             )
         ));
