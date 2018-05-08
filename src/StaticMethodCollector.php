@@ -41,11 +41,8 @@ class StaticMethodCollector
     */
     private $autoReset;
 
-    public function __construct(
-        array $staticMethods,
-        array $interfaces,
-        bool $autoReset = true
-    ) {
+    public function __construct(array $staticMethods, array $interfaces, bool $autoReset = true)
+    {
         $filteredMethods = [];
 
         /**
