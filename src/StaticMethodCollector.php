@@ -170,18 +170,18 @@ class StaticMethodCollector
         $refReturn = $refMethod->getReturnType();
 
         return
-                    $refMethod->isStatic() &&
-                    $refMethod->isPublic() &&
-                    0 === $refMethod->getNumberOfRequiredParameters() &&
+            $refMethod->isStatic() &&
+            $refMethod->isPublic() &&
+            0 === $refMethod->getNumberOfRequiredParameters() &&
             ($refReturn instanceof ReflectionType) &&
             $this->FilterReflectionReturnType($refReturn);
     }
 
     private function FilterReflectionReturnType(ReflectionType $refReturn) : bool
     {
-            $refReturnName = $refReturn->__toString();
+        $refReturnName = $refReturn->__toString();
 
-            return 'array' === $refReturnName || is_a($refReturnName, Traversable::class, true);
+        return 'array' === $refReturnName || is_a($refReturnName, Traversable::class, true);
     }
 
     /**
