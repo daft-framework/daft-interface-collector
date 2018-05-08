@@ -195,12 +195,12 @@ class StaticMethodCollector
         * @var array<string, string[]>
         */
         $filteredMethods = $this->FilterNonZeroArray(array_map(
-                [$this, 'FilterArrayOfInterfaces'],
-                array_filter(
-                    array_filter($methods, 'is_string', ARRAY_FILTER_USE_KEY),
-                    $this->MakeMethodFilter($ref),
-                    ARRAY_FILTER_USE_KEY
-                )
+            [$this, 'FilterArrayOfInterfaces'],
+            array_filter(
+                array_filter($methods, 'is_string', ARRAY_FILTER_USE_KEY),
+                $this->MakeMethodFilter($ref),
+                ARRAY_FILTER_USE_KEY
+            )
         ));
 
         return $filteredMethods;
