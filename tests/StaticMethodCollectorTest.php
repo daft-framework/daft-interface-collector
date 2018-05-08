@@ -23,11 +23,17 @@ class StaticMethodCollectorTest extends Base
         yield from [
             [
                 [
-                    'DaftRouterRouteAndMiddlewareSources' => [
-                        DaftMiddleware::class,
-                        DaftRoute::class,
-                        DaftSource::class,
+                    DaftSource::class => [
+                        'DaftRouterRouteAndMiddlewareSources' => [
+                            DaftMiddleware::class,
+                            DaftRoute::class,
+                            DaftSource::class,
+                        ],
                     ],
+                ],
+                [
+                    DaftMiddleware::class,
+                    DaftRoute::class,
                 ],
                 [
                     Fixtures\Home::class,
@@ -44,10 +50,11 @@ class StaticMethodCollectorTest extends Base
     */
     public function testCollection(
         array $staticMethods,
+        array $interfaces,
         array $expectedResult,
         string ...$implementations
     ) : void {
-        $collector = new StaticMethodCollector($staticMethods);
+        $collector = new StaticMethodCollector($staticMethods, $interfaces);
 
         $collection = $collector->Collect(...$implementations);
 
@@ -63,10 +70,11 @@ class StaticMethodCollectorTest extends Base
     */
     public function testCollectionWithoutResettingProcessedSources(
         array $staticMethods,
+        array $interfaces,
         array $expectedResult,
         string ...$implementations
     ) : void {
-        $collector = new StaticMethodCollector($staticMethods, false);
+        $collector = new StaticMethodCollector($staticMethods, $interfaces, false);
 
         $collection = $collector->Collect(...$implementations);
 
