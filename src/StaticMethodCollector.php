@@ -158,15 +158,14 @@ class StaticMethodCollector
     private function MakeMethodFilter(ReflectionClass $ref) : Closure
     {
         return function (string $maybe) use ($ref) : bool {
-            if ( ! $ref->hasMethod($maybe)) {
-                return false;
-            }
+            return
+                $ref->hasMethod($maybe) &&
+                $this->FilterReflectionMethod($ref->getMethod($maybe));
+        };
+    }
 
-            /**
-            * @var ReflectionMethod $refMethod
-            */
-            $refMethod = $ref->getMethod($maybe);
-
+    private function FilterReflectionMethod(ReflectionMethod $refMethod) : bool
+    {
             if (
                 ! (
                     $refMethod->isStatic() &&
@@ -185,7 +184,6 @@ class StaticMethodCollector
             $refReturnName = $refReturn->__toString();
 
             return 'array' === $refReturnName || is_a($refReturnName, Traversable::class, true);
-        };
     }
 
     /**
