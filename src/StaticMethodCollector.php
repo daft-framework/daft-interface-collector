@@ -161,10 +161,11 @@ class StaticMethodCollector
             if ( ! $ref->hasMethod($maybe)) {
                 return false;
             }
-                /**
-                * @var ReflectionMethod $refMethod
-                */
-                $refMethod = $ref->getMethod($maybe);
+
+            /**
+            * @var ReflectionMethod $refMethod
+            */
+            $refMethod = $ref->getMethod($maybe);
 
             if (
                 ! (
@@ -176,15 +177,16 @@ class StaticMethodCollector
             ) {
                 return false;
             }
-                    /**
-                    * @var \ReflectionType $refReturn
-                    */
-                    $refReturn = $refMethod->getReturnType();
-                    $refReturnName = $refReturn->__toString();
 
-                    return
-                        'array' === $refReturnName ||
-                        is_a($refReturnName, Traversable::class, true);
+            /**
+            * @var \ReflectionType $refReturn
+            */
+            $refReturn = $refMethod->getReturnType();
+            $refReturnName = $refReturn->__toString();
+
+            return
+                'array' === $refReturnName ||
+                is_a($refReturnName, Traversable::class, true);
         };
     }
 
