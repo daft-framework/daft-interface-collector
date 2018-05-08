@@ -46,12 +46,7 @@ class StaticMethodCollector
     ) {
         $staticMethods = array_filter(
             $staticMethods,
-            /**
-            * @param mixed $maybe
-            */
-            function ($maybe) : bool {
-                return is_string($maybe) && interface_exists($maybe);
-            },
+            [$this, 'shouldContainInterfaces'],
             ARRAY_FILTER_USE_KEY
         );
 
@@ -82,12 +77,7 @@ class StaticMethodCollector
         */
         $filteredInterfaces = array_filter(
             $interfaces,
-            /**
-            * @param mixed $maybe
-            */
-            function ($maybe) : bool {
-                return is_string($maybe) && interface_exists($maybe);
-            }
+            [$this, 'shouldContainInterfaces']
         );
 
         $this->interfaces = $filteredInterfaces;
@@ -226,12 +216,7 @@ class StaticMethodCollector
             function (array $methodInterfaces) : array {
                 return array_filter(
                     $methodInterfaces,
-                    /**
-                    * @param mixed $maybe
-                    */
-                    function ($maybe) : bool {
-                        return is_string($maybe) && interface_exists($maybe);
-                    }
+                    [$this, 'shouldContainInterfaces']
                 );
             },
             $methods
