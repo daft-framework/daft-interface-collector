@@ -80,15 +80,17 @@ class StaticMethodCollector
     {
         foreach (array_filter($implementations, 'class_exists') as $implementation) {
             if (
-                in_array($implementation, $this->processedSources, true) ||
-                in_array($implementation, $this->alreadyYielded, true)
+                in_array($implementation, $this->processedSources, true)
             ) {
                 continue;
             }
             $this->processedSources[] = $implementation;
 
             foreach ($this->interfaces as $interface) {
-                if (is_a($implementation, $interface, true)) {
+                if (
+                    ! in_array($implementation, $this->alreadyYielded, true) &&
+                    is_a($implementation, $interface, true)
+                ) {
                     yield $implementation;
                     $this->alreadyYielded[] = $implementation;
                     break;
