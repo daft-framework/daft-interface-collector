@@ -78,7 +78,6 @@ class StaticMethodCollector
 
     protected function CollectInterfaces(string ...$implementations) : Generator
     {
-        $interfaces = array_keys($this->staticMethods);
         foreach (array_filter($implementations, 'class_exists') as $implementation) {
             if (
                 in_array($implementation, $this->processedSources, true) ||
@@ -96,6 +95,13 @@ class StaticMethodCollector
                 }
             }
 
+            yield from $this->CollectInterfacesFromImplementation($implementation);
+        }
+    }
+
+    private function CollectInterfacesFromImplementation(string $implementation) : Generator
+    {
+        $interfaces = array_keys($this->staticMethods);
             /**
             * @var string $interface
             */
@@ -128,7 +134,6 @@ class StaticMethodCollector
                     }
                 }
             }
-        }
     }
 
     private function FilterIsA(string $implementation, array $interfaces) : array
