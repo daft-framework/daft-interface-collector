@@ -124,7 +124,7 @@ class StaticMethodCollector
                         $this->alreadyYielded[] = $result;
                     }
 
-                        yield from $this->CollectInterfaces($result);
+                    yield from $this->CollectInterfaces($result);
                 }
             }
         }
