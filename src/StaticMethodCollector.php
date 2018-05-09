@@ -76,13 +76,6 @@ class StaticMethodCollector
         yield from $this->CollectInterfaces(...$implementations);
     }
 
-    private function FilterIsA(string $implementation, array $interfaces) : array
-    {
-        return array_filter($interfaces, function (string $interface) use($implementation) : bool {
-            return is_a($implementation, $interface, true);
-        });
-    }
-
     protected function CollectInterfaces(string ...$implementations) : Generator
     {
         $interfaces = array_keys($this->staticMethods);
@@ -136,6 +129,13 @@ class StaticMethodCollector
                 }
             }
         }
+    }
+
+    private function FilterIsA(string $implementation, array $interfaces) : array
+    {
+        return array_filter($interfaces, function (string $interface) use ($implementation) : bool {
+            return is_a($implementation, $interface, true);
+        });
     }
 
     /**
