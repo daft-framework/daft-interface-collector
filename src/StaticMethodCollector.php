@@ -78,9 +78,6 @@ class StaticMethodCollector
 
     protected function CollectInterfaces(string ...$implementations) : Generator
     {
-        /**
-        * @var string[] $interfaces
-        */
         $interfaces = array_keys($this->staticMethods);
         foreach (array_filter($implementations, 'class_exists') as $implementation) {
             if (
@@ -91,9 +88,6 @@ class StaticMethodCollector
             }
             $this->processedSources[] = $implementation;
 
-            /**
-            * @var string $interface
-            */
             foreach ($this->interfaces as $interface) {
                 if (is_a($implementation, $interface, true)) {
                     yield $implementation;
@@ -104,18 +98,12 @@ class StaticMethodCollector
 
             foreach ($interfaces as $interface) {
                 if (is_a($implementation, $interface, true)) {
-                    /**
-                    * @var array<int, string> $types
-                    */
                     foreach ($this->staticMethods[$interface] as $method => $types) {
                         /**
                         * @var iterable<string> $methodResult
                         */
                         $methodResult = $implementation::$method();
 
-                        /**
-                        * @var string $result
-                        */
                         foreach ($methodResult as $result) {
                             if (in_array($result, $this->alreadyYielded, true)) {
                                 continue;
