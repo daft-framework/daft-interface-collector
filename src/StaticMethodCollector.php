@@ -102,38 +102,38 @@ class StaticMethodCollector
     private function CollectInterfacesFromImplementation(string $implementation) : Generator
     {
         $interfaces = array_keys($this->staticMethods);
-            /**
-            * @var string $interface
-            */
-            foreach ($this->FilterIsA($implementation, $interfaces) as $interface) {
-                foreach ($this->staticMethods[$interface] as $method => $types) {
-                    /**
-                    * @var iterable<string> $methodResult
-                    */
-                    $methodResult = $implementation::$method();
+        /**
+        * @var string $interface
+        */
+        foreach ($this->FilterIsA($implementation, $interfaces) as $interface) {
+            foreach ($this->staticMethods[$interface] as $method => $types) {
+                /**
+                * @var iterable<string> $methodResult
+                */
+                $methodResult = $implementation::$method();
 
-                    foreach ($methodResult as $result) {
-                        if (in_array($result, $this->alreadyYielded, true)) {
-                            continue;
-                        }
-                        /**
-                        * @var string $type
-                        */
-                        foreach ($this->FilterIsA($result, $types) as $type) {
-                            yield $result;
-                            $this->alreadyYielded[] = $result;
-                        }
-                        /**
-                        * @var string $checkResultWithInterface
-                        */
-                        foreach (
-                            $this->FilterIsA($result, $interfaces) as $checkResultWithInterface
-                        ) {
-                            yield from $this->CollectInterfaces($result);
-                        }
+                foreach ($methodResult as $result) {
+                    if (in_array($result, $this->alreadyYielded, true)) {
+                        continue;
+                    }
+                    /**
+                    * @var string $type
+                    */
+                    foreach ($this->FilterIsA($result, $types) as $type) {
+                        yield $result;
+                        $this->alreadyYielded[] = $result;
+                    }
+                    /**
+                    * @var string $checkResultWithInterface
+                    */
+                    foreach (
+                        $this->FilterIsA($result, $interfaces) as $checkResultWithInterface
+                    ) {
+                        yield from $this->CollectInterfaces($result);
                     }
                 }
             }
+        }
     }
 
     private function FilterIsA(string $implementation, array $interfaces) : array
