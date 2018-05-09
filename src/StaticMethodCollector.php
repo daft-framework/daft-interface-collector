@@ -123,14 +123,8 @@ class StaticMethodCollector
                         yield $result;
                         $this->alreadyYielded[] = $result;
                     }
-                    /**
-                    * @var string $checkResultWithInterface
-                    */
-                    foreach (
-                        $this->FilterIsA($result, $interfaces) as $checkResultWithInterface
-                    ) {
+
                         yield from $this->CollectInterfaces($result);
-                    }
                 }
             }
         }
