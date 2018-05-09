@@ -78,12 +78,16 @@ class StaticMethodCollector
 
     protected function CollectInterfaces(string ...$implementations) : Generator
     {
-        foreach (array_filter($implementations, 'class_exists') as $implementation) {
-            if (
-                in_array($implementation, $this->processedSources, true)
-            ) {
-                continue;
-            }
+        foreach (
+            array_filter(
+                $implementations,
+                function (string $implementation) : bool {
+                    return
+                        class_exists($implementation) &&
+                        ! in_array($implementation, $this->processedSources, true);
+                }
+            ) as $implementation
+        ) {
             $this->processedSources[] = $implementation;
 
             foreach ($this->interfaces as $interface) {
