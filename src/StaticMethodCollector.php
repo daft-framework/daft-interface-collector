@@ -59,7 +59,7 @@ class StaticMethodCollector
         /**
         * @var string[] $filteredInterfaces
         */
-        $filteredInterfaces = $this->FilterArrayOfInterfaces($interfaces);
+        $filteredInterfaces = $this->FilterArrayOfInterfacesOrClasses($interfaces);
 
         $this->interfaces = $filteredInterfaces;
 
@@ -154,6 +154,21 @@ class StaticMethodCollector
     }
 
     /**
+    * @return string[]
+    */
+    private function FilterArrayOfInterfacesOrClasses(array $interfaces) : array
+    {
+        /**
+        * @var string[] $strings
+        */
+        $strings = array_filter($interfaces, 'is_string');
+
+        return array_filter($strings, function (string $maybe) : bool {
+            return interface_exists($maybe) || class_exists($maybe);
+        });
+    }
+
+    /**
     * @return array<string, array>
     */
     private function FilterArrayOfInterfaceOffsets(array $interfaces) : array
@@ -202,7 +217,7 @@ class StaticMethodCollector
         * @var array<string, string[]>
         */
         $filteredMethods = $this->FilterNonZeroArray(array_map(
-            [$this, 'FilterArrayOfInterfaces'],
+            [$this, 'FilterArrayOfInterfacesOrClasses'],
             array_filter(
                 array_filter($methods, 'is_string', ARRAY_FILTER_USE_KEY),
                 $this->MakeMethodFilter($interface),
