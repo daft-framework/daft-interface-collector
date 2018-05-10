@@ -11,6 +11,7 @@ use Closure;
 use Generator;
 use ReflectionClass;
 use ReflectionMethod;
+use ReflectionNamedType;
 use ReflectionType;
 use Traversable;
 
@@ -203,7 +204,7 @@ class StaticMethodCollector
 
     private function FilterReflectionReturnType(? ReflectionType $refReturn) : bool
     {
-        $refReturnName = is_null($refReturn) ? '' : $refReturn->__toString();
+        $refReturnName = ($refReturn instanceof ReflectionNamedType) ? $refReturn->getName() : '';
 
         return 'array' === $refReturnName || is_a($refReturnName, Traversable::class, true);
     }
