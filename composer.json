@@ -16,7 +16,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SignpostMarv\\DaftInterfaceCollector\\Tests\\": "./tests/",
+            "SignpostMarv\\DaftInterfaceCollector\\Tests\\": "./Tests/",
             "SignpostMarv\\DaftRouter\\Tests\\": "./vendor/signpostmarv/daft-router/tests/daft-router/"
         }
     },
@@ -27,11 +27,11 @@
     "scripts": {
         "tests": [
             "phpunit -vvvv",
-            "phpstan analyse -c ./phpstan.neon .php_cs.dist src tests",
+            "phpstan analyse -c ./phpstan.neon .php_cs.dist src Tests",
             "psalm",
-            "phpcpd src tests",
+            "phpcpd src Tests",
             "phpmnd src",
-            "phpmnd tests",
+            "phpmnd Tests",
             "php-cs-fixer fix --verbose --allow-risky=yes --dry-run"
         ]
     },
