@@ -114,6 +114,20 @@ class StaticMethodCollector
         */
         foreach ($this->FilterIsA($implementation, $interfaces) as $interface) {
             foreach ($this->staticMethods[$interface] as $method => $types) {
+                yield from $this->CollectInterfacesFromImplementationTypes(
+                    $implementation,
+                    $method,
+                    $types
+                );
+            }
+        }
+    }
+
+    private function CollectInterfacesFromImplementationTypes(
+        string $implementation,
+        string $method,
+        array $types
+    ) : Generator {
                 /**
                 * @var iterable<string> $methodResult
                 */
@@ -133,8 +147,6 @@ class StaticMethodCollector
 
                     yield from $this->CollectInterfaces($result);
                 }
-            }
-        }
     }
 
     private function FilterIsA(string $implementation, array $interfaces) : array
