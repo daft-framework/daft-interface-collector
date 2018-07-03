@@ -128,25 +128,25 @@ class StaticMethodCollector
         string $method,
         array $types
     ) : Generator {
-                /**
-                * @var iterable<string> $methodResult
-                */
-                $methodResult = $implementation::$method();
+        /**
+        * @var iterable<string> $methodResult
+        */
+        $methodResult = $implementation::$method();
 
-                foreach ($methodResult as $result) {
-                    if (in_array($result, $this->alreadyYielded, true)) {
-                        continue;
-                    }
-                    /**
-                    * @var string $type
-                    */
-                    foreach ($this->FilterIsA($result, $types) as $type) {
-                        yield $result;
-                        $this->alreadyYielded[] = $result;
-                    }
+        foreach ($methodResult as $result) {
+            if (in_array($result, $this->alreadyYielded, true)) {
+                continue;
+            }
+            /**
+            * @var string $type
+            */
+            foreach ($this->FilterIsA($result, $types) as $type) {
+                yield $result;
+                $this->alreadyYielded[] = $result;
+            }
 
-                    yield from $this->CollectInterfaces($result);
-                }
+            yield from $this->CollectInterfaces($result);
+        }
     }
 
     private function FilterIsA(string $implementation, array $interfaces) : array
