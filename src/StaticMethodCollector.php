@@ -98,16 +98,16 @@ class StaticMethodCollector
     private function CollectInterfacesFromImplementationCheckInterfaces(
         string $implementation
     ) : Generator {
-            foreach ($this->interfaces as $interface) {
-                if (
-                    ! in_array($implementation, $this->alreadyYielded, true) &&
-                    is_a($implementation, $interface, true)
-                ) {
-                    yield $implementation;
-                    $this->alreadyYielded[] = $implementation;
-                    break;
-                }
+        foreach ($this->interfaces as $interface) {
+            if (
+                ! in_array($implementation, $this->alreadyYielded, true) &&
+                is_a($implementation, $interface, true)
+            ) {
+                yield $implementation;
+                $this->alreadyYielded[] = $implementation;
+                break;
             }
+        }
     }
 
     private function CollectInterfacesFromImplementation(string $implementation) : Generator
