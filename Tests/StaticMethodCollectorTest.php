@@ -58,11 +58,11 @@ class StaticMethodCollectorTest extends Base
 
         $collection = $collector->Collect(...$implementations);
 
-        $this->assertSame($expectedResult, iterator_to_array($collection));
+        static::assertSame($expectedResult, iterator_to_array($collection));
 
         $collection = $collector->Collect(...$implementations);
 
-        $this->assertSame($expectedResult, iterator_to_array($collection));
+        static::assertSame($expectedResult, iterator_to_array($collection));
     }
 
     /**
@@ -78,10 +78,10 @@ class StaticMethodCollectorTest extends Base
 
         $collection = $collector->Collect(...$implementations);
 
-        $this->assertSame($expectedResult, iterator_to_array($collection));
+        static::assertSame($expectedResult, iterator_to_array($collection));
 
         $collection = $collector->Collect(...$implementations);
 
-        $this->assertSame([], iterator_to_array($collection));
+        static::assertSame([], iterator_to_array($collection));
     }
 }
