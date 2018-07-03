@@ -90,7 +90,14 @@ class StaticMethodCollector
             ) as $implementation
         ) {
             $this->processedSources[] = $implementation;
+            yield from $this->CollectInterfacesFromImplementationCheckInterfaces($implementation);
+            yield from $this->CollectInterfacesFromImplementation($implementation);
+        }
+    }
 
+    private function CollectInterfacesFromImplementationCheckInterfaces(
+        string $implementation
+    ) : Generator {
             foreach ($this->interfaces as $interface) {
                 if (
                     ! in_array($implementation, $this->alreadyYielded, true) &&
@@ -101,9 +108,6 @@ class StaticMethodCollector
                     break;
                 }
             }
-
-            yield from $this->CollectInterfacesFromImplementation($implementation);
-        }
     }
 
     private function CollectInterfacesFromImplementation(string $implementation) : Generator
