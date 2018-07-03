@@ -95,7 +95,7 @@ class StaticMethodCollector
         }
     }
 
-    private function CollectInterfacesFromImplementationCheckInterfaces(
+    final protected function CollectInterfacesFromImplementationCheckInterfaces(
         string $implementation
     ) : Generator {
         foreach ($this->interfaces as $interface) {
@@ -110,7 +110,7 @@ class StaticMethodCollector
         }
     }
 
-    private function CollectInterfacesFromImplementation(string $implementation) : Generator
+    final protected function CollectInterfacesFromImplementation(string $implementation) : Generator
     {
         $interfaces = array_keys($this->staticMethods);
         /**
@@ -127,7 +127,7 @@ class StaticMethodCollector
         }
     }
 
-    private function CollectInterfacesFromImplementationTypes(
+    final protected function CollectInterfacesFromImplementationTypes(
         string $implementation,
         string $method,
         array $types
@@ -153,7 +153,7 @@ class StaticMethodCollector
         }
     }
 
-    private function FilterIsA(string $implementation, array $interfaces) : array
+    final protected function FilterIsA(string $implementation, array $interfaces) : array
     {
         return array_filter($interfaces, function (string $interface) use ($implementation) : bool {
             return is_a($implementation, $interface, true);
@@ -163,7 +163,7 @@ class StaticMethodCollector
     /**
     * @return string[]|array<string, mixed>
     */
-    private function FilterArrayOfInterfaces(array $interfaces, int $flag = 0) : array
+    final protected function FilterArrayOfInterfaces(array $interfaces, int $flag = 0) : array
     {
         $strings = array_filter($interfaces, 'is_string', $flag);
 
@@ -173,7 +173,7 @@ class StaticMethodCollector
     /**
     * @return string[]
     */
-    private function FilterArrayOfInterfacesOrClasses(array $interfaces) : array
+    final protected function FilterArrayOfInterfacesOrClasses(array $interfaces) : array
     {
         /**
         * @var string[] $strings
@@ -188,7 +188,7 @@ class StaticMethodCollector
     /**
     * @return array<string, array>
     */
-    private function FilterArrayOfInterfaceOffsets(array $interfaces) : array
+    final protected function FilterArrayOfInterfaceOffsets(array $interfaces) : array
     {
         /**
         * @var array<string, array> $strings
@@ -198,7 +198,7 @@ class StaticMethodCollector
         return array_filter($strings, 'is_array');
     }
 
-    private function MakeMethodFilter(string $interface) : Closure
+    final protected function MakeMethodFilter(string $interface) : Closure
     {
         return function (string $maybe) use ($interface) : bool {
             $ref = new ReflectionClass($interface);
@@ -209,7 +209,7 @@ class StaticMethodCollector
         };
     }
 
-    private function FilterReflectionMethod(ReflectionMethod $refMethod) : bool
+    final protected function FilterReflectionMethod(ReflectionMethod $refMethod) : bool
     {
         return
             $refMethod->isStatic() &&
@@ -218,7 +218,7 @@ class StaticMethodCollector
             $this->FilterReflectionReturnType($refMethod->getReturnType());
     }
 
-    private function FilterReflectionReturnType(? ReflectionType $refReturn) : bool
+    final protected function FilterReflectionReturnType(? ReflectionType $refReturn) : bool
     {
         $refReturnName = ($refReturn instanceof ReflectionNamedType) ? $refReturn->getName() : '';
 
@@ -228,7 +228,7 @@ class StaticMethodCollector
     /**
     * @return array<string, string[]>
     */
-    private function FilterMethods(string $interface, array $methods) : array
+    final protected function FilterMethods(string $interface, array $methods) : array
     {
         /**
         * @var array<string, string[]>
@@ -248,7 +248,7 @@ class StaticMethodCollector
     /**
     * @var array[]
     */
-    private function FilterNonZeroArray(array $in) : array
+    final protected function FilterNonZeroArray(array $in) : array
     {
         return array_filter(
             $in,
