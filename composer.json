@@ -48,7 +48,6 @@
         "povils/phpmnd": "^2.0",
         "roave/security-advisories": "dev-master",
         "sebastian/phpcpd": "^4.0",
-        "signpostmarv/daft-router": "^0.1",
         "signpostmarv/php-cs-fixer-config": "^0.5.1",
         "vimeo/psalm": "^2.0"
     }

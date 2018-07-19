@@ -11,10 +11,6 @@ use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase as Base;
 use SignpostMarv\DaftInterfaceCollector\StaticMethodCollector;
-use SignpostMarv\DaftRouter\DaftSource;
-use SignpostMarv\DaftRouter\DaftRoute;
-use SignpostMarv\DaftRouter\DaftMiddleware;
-use SignpostMarv\DaftRouter\Tests\Fixtures;
 
 class StaticMethodCollectorTest extends Base
 {
@@ -23,17 +19,17 @@ class StaticMethodCollectorTest extends Base
         yield from [
             [
                 [
-                    DaftSource::class => [
+                    Fixtures\DaftSource::class => [
                         'DaftRouterRouteAndMiddlewareSources' => [
-                            DaftMiddleware::class,
-                            DaftRoute::class,
-                            DaftSource::class,
+                            Fixtures\DaftMiddleware::class,
+                            Fixtures\DaftRoute::class,
+                            Fixtures\DaftSource::class,
                         ],
                     ],
                 ],
                 [
-                    DaftMiddleware::class,
-                    DaftRoute::class,
+                    Fixtures\DaftMiddleware::class,
+                    Fixtures\DaftRoute::class,
                 ],
                 [
                     Fixtures\Home::class,
