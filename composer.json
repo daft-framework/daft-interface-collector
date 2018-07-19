@@ -16,8 +16,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SignpostMarv\\DaftInterfaceCollector\\Tests\\": "./Tests/",
-            "SignpostMarv\\DaftRouter\\Tests\\": "./vendor/signpostmarv/daft-router/tests/daft-router/"
+            "SignpostMarv\\DaftInterfaceCollector\\Tests\\": "./Tests/"
         }
     },
     "config": {
