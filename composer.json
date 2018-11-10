@@ -32,13 +32,15 @@
             "phpmnd src",
             "phpmnd Tests",
             "composer-require-checker check ./composer.json",
-            "php-cs-fixer fix --verbose --allow-risky=yes --dry-run"
+            "php-cs-fixer fix --verbose --allow-risky=yes --dry-run",
+            "churn run src Tests"
         ]
     },
     "require": {
         "php": "^7.1"
     },
     "require-dev": {
+        "bmitch/churn-php": "^1.0",
         "maglnet/composer-require-checker": "^1.0",
         "phpstan/phpstan": "^0.10.1",
         "phpstan/phpstan-phpunit": "^0.10.0",
