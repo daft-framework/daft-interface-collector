@@ -127,6 +127,9 @@ class StaticMethodCollector
         }
     }
 
+    /**
+    * @psalm-suppress InvalidStringClass
+    */
     final protected function CollectInterfacesFromImplementationTypes(
         string $implementation,
         string $method,
