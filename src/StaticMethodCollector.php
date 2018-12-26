@@ -51,14 +51,14 @@ class StaticMethodCollector
         }
 
         /**
-        * @var array<string, array<string, string[]>> $filteredMethods
+        * @var array<string, array<string, string[]>>
         */
         $filteredMethods = $this->FilterNonZeroArray($filteredMethods);
 
         $this->staticMethods = $filteredMethods;
 
         /**
-        * @var string[] $filteredInterfaces
+        * @var string[]
         */
         $filteredInterfaces = $this->FilterArrayOfInterfacesOrClasses($interfaces);
 
@@ -114,7 +114,7 @@ class StaticMethodCollector
     {
         $interfaces = array_keys($this->staticMethods);
         /**
-        * @var string $interface
+        * @var string
         */
         foreach ($this->FilterIsA($implementation, $interfaces) as $interface) {
             foreach ($this->staticMethods[$interface] as $method => $types) {
@@ -136,7 +136,7 @@ class StaticMethodCollector
         array $types
     ) : Generator {
         /**
-        * @var iterable<string> $methodResult
+        * @var iterable<string>
         */
         $methodResult = $implementation::$method();
 
@@ -145,7 +145,7 @@ class StaticMethodCollector
                 continue;
             }
             /**
-            * @var string $type
+            * @var string
             */
             foreach ($this->FilterIsA($result, $types) as $type) {
                 yield $result;
@@ -179,7 +179,7 @@ class StaticMethodCollector
     final protected function FilterArrayOfInterfacesOrClasses(array $interfaces) : array
     {
         /**
-        * @var string[] $strings
+        * @var string[]
         */
         $strings = array_filter($interfaces, 'is_string');
 
@@ -194,7 +194,7 @@ class StaticMethodCollector
     final protected function FilterArrayOfInterfaceOffsets(array $interfaces) : array
     {
         /**
-        * @var array<string, array> $strings
+        * @var array<string, array>
         */
         $strings = $this->FilterArrayOfInterfaces($interfaces, ARRAY_FILTER_USE_KEY);
 
