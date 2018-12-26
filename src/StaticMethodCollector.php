@@ -113,9 +113,7 @@ class StaticMethodCollector
     final protected function CollectInterfacesFromImplementation(string $implementation) : Generator
     {
         $interfaces = array_keys($this->staticMethods);
-        /**
-        * @var string
-        */
+
         foreach ($this->FilterIsA($implementation, $interfaces) as $interface) {
             foreach ($this->staticMethods[$interface] as $method => $types) {
                 yield from $this->CollectInterfacesFromImplementationTypes(
@@ -144,9 +142,7 @@ class StaticMethodCollector
             if (in_array($result, $this->alreadyYielded, true)) {
                 continue;
             }
-            /**
-            * @var string
-            */
+
             foreach ($this->FilterIsA($result, $types) as $type) {
                 yield $result;
                 $this->alreadyYielded[] = $result;
