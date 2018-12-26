@@ -18,7 +18,7 @@ use Traversable;
 class StaticMethodCollector
 {
     /**
-    * @var array<string, array<string, string[]>>
+    * @var array<string, array<string, array<int, string>>>
     */
     private $staticMethods = [];
 
@@ -50,12 +50,7 @@ class StaticMethodCollector
             $filteredMethods[$interface] = $this->FilterMethods($interface, $methods);
         }
 
-        /**
-        * @var array<string, array<string, string[]>>
-        */
-        $filteredMethods = $this->FilterNonZeroArray($filteredMethods);
-
-        $this->staticMethods = $filteredMethods;
+        $this->staticMethods = $this->FilterNonZeroArray($filteredMethods);
 
         /**
         * @var string[]
@@ -126,6 +121,8 @@ class StaticMethodCollector
     }
 
     /**
+    * @param array<int, string> $types
+    *
     * @psalm-suppress InvalidStringClass
     */
     final protected function CollectInterfacesFromImplementationTypes(
@@ -152,11 +149,21 @@ class StaticMethodCollector
         }
     }
 
+    /**
+    * @param array<int, string> $interfaces
+    *
+    * @return array<int, string>
+    */
     final protected function FilterIsA(string $implementation, array $interfaces) : array
     {
-        return array_filter($interfaces, function (string $interface) use ($implementation) : bool {
+        /**
+        * @var array<int, string>
+        */
+        $out = array_filter($interfaces, function (string $interface) use ($implementation) : bool {
             return is_a($implementation, $interface, true);
         });
+
+        return $out;
     }
 
     /**
@@ -245,15 +252,20 @@ class StaticMethodCollector
     }
 
     /**
-    * @var array[]
+    * @return array<string, array<string, array<int, string>>>
     */
     final protected function FilterNonZeroArray(array $in) : array
     {
-        return array_filter(
+        /**
+        * @var array<string, array<string, array<int, string>>>
+        */
+        $out = array_filter(
             $in,
             function (array $val) : bool {
                 return count($val) > 0;
             }
         );
+
+        return $out;
     }
 }
