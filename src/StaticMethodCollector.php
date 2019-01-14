@@ -11,7 +11,6 @@ use Closure;
 use Generator;
 use ReflectionClass;
 use ReflectionMethod;
-use ReflectionNamedType;
 use ReflectionType;
 use Traversable;
 

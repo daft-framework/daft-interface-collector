@@ -15,7 +15,6 @@ class NotLoggedIn implements DaftMiddleware
         Request $request,
         Response $response = null
     ) {
-        return null;
     }
 
     /**
