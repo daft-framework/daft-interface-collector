@@ -22,16 +22,6 @@ class StaticMethodCollector
     const INT_FILTER_NON_EMPTY_ARRAY = 0;
 
     /**
-    * @var array<string, array<string, array<int, string>>>
-    */
-    private $staticMethods = [];
-
-    /**
-    * @var string[]
-    */
-    private $interfaces = [];
-
-    /**
     * @var array<int, string>
     */
     protected $processedSources = [];
@@ -45,6 +35,16 @@ class StaticMethodCollector
     * @var bool
     */
     protected $autoReset;
+
+    /**
+    * @var array<string, array<string, array<int, string>>>
+    */
+    private $staticMethods = [];
+
+    /**
+    * @var string[]
+    */
+    private $interfaces = [];
 
     public function __construct(array $staticMethods, array $interfaces, bool $autoReset = true)
     {
