@@ -10,24 +10,20 @@
     },
     "mutators": {
         "@default": true,
-        "Break_": {
-            "ignore": [
-                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfacesFromImplementationCheckInterfaces"
-            ]
-        },
         "Continue_": {
             "ignore": [
                 "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfacesFromImplementationTypes"
             ]
         },
-        "Foreach_": {
-            "ignore": [
-                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfacesFromImplementationCheckInterfaces"
-            ]
-        },
         "GreaterThan": {
             "ignore": [
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfacesFromImplementationCheckInterfaces",
                 "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterNonZeroArray"
+            ]
+        },
+        "GreaterThanNegotiation": {
+            "ignore": [
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfacesFromImplementationCheckInterfaces"
             ]
         },
         "LogicalAnd": {

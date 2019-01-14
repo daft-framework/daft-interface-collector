@@ -102,14 +102,13 @@ class StaticMethodCollector
                 return static::IsStringA($implementation, $interface);
             }
         );
-        foreach ($checking as $interface) {
-            if (
-                ! static::IsStringInArray($implementation, $this->alreadyYielded)
-            ) {
+
+        if (
+            count($checking) > self::INT_FILTER_NON_EMPTY_ARRAY &&
+            ! static::IsStringInArray($implementation, $this->alreadyYielded)
+        ) {
                 yield $implementation;
                 $this->alreadyYielded[] = $implementation;
-                break;
-            }
         }
     }
 
