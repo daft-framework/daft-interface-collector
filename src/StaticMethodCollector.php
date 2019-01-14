@@ -83,7 +83,6 @@ class StaticMethodCollector
                 $implementations,
                 function (string $implementation) : bool {
                     return
-                        class_exists($implementation) &&
                         ! static::IsStringInArray($implementation, $this->processedSources);
                 }
             ) as $implementation
