@@ -17,6 +17,10 @@ use Traversable;
 
 class StaticMethodCollector
 {
+    const DEFAULT_INT_ARRAY_FILTER_FLAG = 0;
+
+    const INT_FILTER_NON_EMPTY_ARRAY = 0;
+
     /**
     * @var array<string, array<string, array<int, string>>>
     */
@@ -169,7 +173,10 @@ class StaticMethodCollector
     /**
     * @return string[]|array<string, mixed>
     */
-    final protected function FilterArrayOfInterfaces(array $interfaces, int $flag = 0) : array
+    final protected function FilterArrayOfInterfaces(
+        array $interfaces,
+        int $flag = self::DEFAULT_INT_ARRAY_FILTER_FLAG
+    ) : array
     {
         $strings = array_filter($interfaces, 'is_string', $flag);
 
@@ -262,7 +269,7 @@ class StaticMethodCollector
         $out = array_filter(
             $in,
             function (array $val) : bool {
-                return count($val) > 0;
+                return count($val) > self::INT_FILTER_NON_EMPTY_ARRAY;
             }
         );
 
