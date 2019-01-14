@@ -107,8 +107,8 @@ class StaticMethodCollector
             count($checking) > self::INT_FILTER_NON_EMPTY_ARRAY &&
             ! static::IsStringInArray($implementation, $this->alreadyYielded)
         ) {
-                yield $implementation;
-                $this->alreadyYielded[] = $implementation;
+            yield $implementation;
+            $this->alreadyYielded[] = $implementation;
         }
     }
 
