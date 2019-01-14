@@ -97,10 +97,15 @@ class StaticMethodCollector
     final protected function CollectInterfacesFromImplementationCheckInterfaces(
         string $implementation
     ) : Generator {
-        foreach ($this->interfaces as $interface) {
+        $checking = array_filter(
+            $this->interfaces,
+            function (string $interface) use ($implementation) : bool {
+                return static::IsStringA($implementation, $interface);
+            }
+        );
+        foreach ($checking as $interface) {
             if (
-                ! static::IsStringInArray($implementation, $this->alreadyYielded) &&
-                static::IsStringA($implementation, $interface)
+                ! static::IsStringInArray($implementation, $this->alreadyYielded)
             ) {
                 yield $implementation;
                 $this->alreadyYielded[] = $implementation;
