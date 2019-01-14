@@ -238,9 +238,9 @@ class StaticMethodCollector
             $this->FilterReflectionReturnType($refMethod->getReturnType());
     }
 
-    final protected function FilterReflectionReturnType(? ReflectionType $refReturn) : bool
+    final protected function FilterReflectionReturnType(ReflectionType $refReturn = null) : bool
     {
-        $refReturnName = ($refReturn instanceof ReflectionNamedType) ? $refReturn->getName() : '';
+        $refReturnName = ($refReturn instanceof ReflectionType) ? $refReturn->__toString() : '';
 
         return 'array' === $refReturnName || static::IsStringA($refReturnName, Traversable::class);
     }

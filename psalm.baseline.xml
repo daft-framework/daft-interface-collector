@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<files>
-  <file src="src\StaticMethodCollector.php">
-    <InvalidStringClass occurrences="1">
-      <code>$implementation::$method()</code>
-    </InvalidStringClass>
-  </file>
-</files>

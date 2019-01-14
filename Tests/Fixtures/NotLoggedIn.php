@@ -8,10 +8,13 @@ namespace SignpostMarv\DaftInterfaceCollector\Tests\Fixtures;
 
 class NotLoggedIn implements DaftMiddleware
 {
+    /**
+    * @return Response|null
+    */
     public static function DaftRouterMiddlewareHandler(
         Request $request,
-        ? Response $response
-    ) : ? Response {
+        Response $response = null
+    ) {
         return null;
     }
 

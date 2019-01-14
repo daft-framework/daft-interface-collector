@@ -77,7 +77,7 @@ class StaticMethodCollectorTest extends Base
         array $interfaces,
         array $expectedResult,
         string ...$implementations
-    ) : void {
+    ) {
         $collector =
             $semiResetting
                 ? new StaticMethodCollector($staticMethods, $interfaces)
@@ -105,7 +105,7 @@ class StaticMethodCollectorTest extends Base
         array $interfaces,
         array $expectedResult,
         string ...$implementations
-    ) : void {
+    ) {
         $collector =
             $semiResetting
                 ? new StaticMethodCollector($staticMethods, $interfaces, false)
