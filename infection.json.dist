@@ -31,7 +31,14 @@
                 "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterReflectionMethod",
                 "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterReflectionReturnType",
                 "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterNonZeroArray",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::IsStringA",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::IsStringInArray",
                 "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::MakeMethodFilter"
+            ]
+        },
+        "TrueValue": {
+            "ignore": [
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::IsStringInArray"
             ]
         }
     }

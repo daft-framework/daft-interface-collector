@@ -80,7 +80,7 @@ class StaticMethodCollector
                 function (string $implementation) : bool {
                     return
                         class_exists($implementation) &&
-                        ! in_array($implementation, $this->processedSources, true);
+                        ! static::IsStringInArray($implementation, $this->processedSources);
                 }
             ) as $implementation
         ) {
@@ -95,8 +95,8 @@ class StaticMethodCollector
     ) : Generator {
         foreach ($this->interfaces as $interface) {
             if (
-                ! in_array($implementation, $this->alreadyYielded, true) &&
-                is_a($implementation, $interface, true)
+                ! static::IsStringInArray($implementation, $this->alreadyYielded) &&
+                static::IsStringA($implementation, $interface)
             ) {
                 yield $implementation;
                 $this->alreadyYielded[] = $implementation;
@@ -136,7 +136,7 @@ class StaticMethodCollector
         $methodResult = $implementation::$method();
 
         foreach ($methodResult as $result) {
-            if (in_array($result, $this->alreadyYielded, true)) {
+            if (static::IsStringInArray($result, $this->alreadyYielded)) {
                 continue;
             }
 
@@ -160,7 +160,7 @@ class StaticMethodCollector
         * @var array<int, string>
         */
         $out = array_filter($interfaces, function (string $interface) use ($implementation) : bool {
-            return is_a($implementation, $interface, true);
+            return static::IsStringA($implementation, $interface);
         });
 
         return $out;
@@ -228,7 +228,7 @@ class StaticMethodCollector
     {
         $refReturnName = ($refReturn instanceof ReflectionNamedType) ? $refReturn->getName() : '';
 
-        return 'array' === $refReturnName || is_a($refReturnName, Traversable::class, true);
+        return 'array' === $refReturnName || static::IsStringA($refReturnName, Traversable::class);
     }
 
     /**
@@ -267,5 +267,15 @@ class StaticMethodCollector
         );
 
         return $out;
+    }
+
+    protected static function IsStringInArray(string $maybe, array $array) : bool
+    {
+        return in_array($maybe, $array, true);
+    }
+
+    protected static function IsStringA(string $maybe, string $thing) : bool
+    {
+        return is_a($maybe, $thing, true);
     }
 }
