@@ -91,7 +91,7 @@ class StaticMethodCollectorTest extends Base
         $collection = $collector->Collect(...$implementations);
 
         if ( ! ($collector instanceof Fixtures\SemiResettingStaticMethodCollector)) {
-        static::assertSame($expectedResult, iterator_to_array($collection));
+            static::assertSame($expectedResult, iterator_to_array($collection));
         } else {
             static::assertSame([], iterator_to_array($collection));
         }
