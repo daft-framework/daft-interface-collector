@@ -1,0 +1,38 @@
+{
+    "timeout": 10,
+    "source": {
+        "directories": [
+            "src"
+        ]
+    },
+    "logs": {
+        "text": "infection.log"
+    },
+    "mutators": {
+        "@default": true,
+        "LogicalAnd": {
+            "ignore": [
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfaces",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterReflectionMethod",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::MakeMethodFilter"
+            ]
+        },
+        "ProtectedVisibility": {
+            "ignore": [
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfaces",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfacesFromImplementation",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfacesFromImplementationCheckInterfaces",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfacesFromImplementationTypes",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterIsA",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterArrayOfInterfaces",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterArrayOfInterfaceOffsets",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterArrayOfInterfacesOrClasses",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterMethods",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterReflectionMethod",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterReflectionReturnType",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterNonZeroArray",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::MakeMethodFilter"
+            ]
+        }
+    }
+}
