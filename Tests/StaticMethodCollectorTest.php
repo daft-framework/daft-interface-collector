@@ -8,7 +8,6 @@ declare(strict_types=1);
 namespace SignpostMarv\DaftInterfaceCollector\Tests;
 
 use Generator;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase as Base;
 use SignpostMarv\DaftInterfaceCollector\StaticMethodCollector;
 
