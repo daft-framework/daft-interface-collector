@@ -126,8 +126,6 @@ class StaticMethodCollector
 
     /**
     * @param array<int, string> $types
-    *
-    * @psalm-suppress InvalidStringClass
     */
     final protected function CollectInterfacesFromImplementationTypes(
         string $implementation,
