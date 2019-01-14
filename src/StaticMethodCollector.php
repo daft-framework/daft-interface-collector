@@ -176,8 +176,7 @@ class StaticMethodCollector
     final protected function FilterArrayOfInterfaces(
         array $interfaces,
         int $flag = self::DEFAULT_INT_ARRAY_FILTER_FLAG
-    ) : array
-    {
+    ) : array {
         $strings = array_filter($interfaces, 'is_string', $flag);
 
         return array_filter($strings, 'interface_exists', $flag);
