@@ -19,7 +19,11 @@ class StaticMethodCollector
 {
     const DEFAULT_INT_ARRAY_FILTER_FLAG = 0;
 
+    const DEFAULT_BOOL_AUTORESET = true;
+
     const INT_FILTER_NON_EMPTY_ARRAY = 0;
+
+    const EXPECTED_NUMBER_OF_REQUIRED_PARAMETERS = 0;
 
     /**
     * @var array<int, string>
@@ -46,8 +50,11 @@ class StaticMethodCollector
     */
     private $interfaces = [];
 
-    public function __construct(array $staticMethods, array $interfaces, bool $autoReset = true)
-    {
+    public function __construct(
+        array $staticMethods,
+        array $interfaces,
+        bool $autoReset = self::DEFAULT_BOOL_AUTORESET
+    ) {
         $filteredMethods = [];
 
         foreach ($this->FilterArrayOfInterfaceOffsets($staticMethods) as $interface => $methods) {
@@ -227,7 +234,7 @@ class StaticMethodCollector
         return
             $refMethod->isStatic() &&
             $refMethod->isPublic() &&
-            0 === $refMethod->getNumberOfRequiredParameters() &&
+            self::EXPECTED_NUMBER_OF_REQUIRED_PARAMETERS === $refMethod->getNumberOfRequiredParameters() &&
             $this->FilterReflectionReturnType($refMethod->getReturnType());
     }
 

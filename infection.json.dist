@@ -15,6 +15,11 @@
                 "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfacesFromImplementationTypes"
             ]
         },
+        "Foreach_": {
+            "ignore": [
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::__construct"
+            ]
+        },
         "GreaterThan": {
             "ignore": [
                 "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfacesFromImplementationCheckInterfaces",
@@ -23,7 +28,14 @@
         },
         "GreaterThanNegotiation": {
             "ignore": [
-                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfacesFromImplementationCheckInterfaces"
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfacesFromImplementationCheckInterfaces",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterNonZeroArray"
+            ]
+        },
+        "Identical": {
+            "ignore": [
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterReflectionMethod",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterReflectionReturnType"
             ]
         },
         "LogicalAnd": {
@@ -31,6 +43,13 @@
                 "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::CollectInterfaces",
                 "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterReflectionMethod",
                 "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::MakeMethodFilter"
+            ]
+        },
+        "LogicalOr": {
+            "ignore": [
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::__construct",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterArrayOfInterfacesOrClasses",
+                "SignpostMarv\\DaftInterfaceCollector\\StaticMethodCollector::FilterReflectionReturnType"
             ]
         },
         "ProtectedVisibility": {
