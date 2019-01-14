@@ -9,6 +9,7 @@
     <projectFiles>
         <file name=".php_cs.dist" />
         <directory name="src" />
+        <directory name="Tests" />
     </projectFiles>
 
     <issueHandlers>

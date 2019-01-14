@@ -14,6 +14,21 @@ use SignpostMarv\DaftInterfaceCollector\StaticMethodCollector;
 
 class StaticMethodCollectorTest extends Base
 {
+    /**
+    * @var bool
+    */
+    protected $backupGlobals = false;
+
+    /**
+    * @var bool
+    */
+    protected $backupStaticAttributes = false;
+
+    /**
+    * @var bool
+    */
+    protected $runTestInSeparateProcess = false;
+
     public function DataProviderCollection() : Generator
     {
         yield from [
@@ -41,50 +56,34 @@ class StaticMethodCollectorTest extends Base
         ];
     }
 
-    public function DataProviderCollectors() : Generator
+    public function DataProviderCollectionToggle() : Generator
     {
-        foreach ($this->DataProviderCollection() as $args) {
-            $staticMethods = array_shift($args);
-            $interfaces = array_shift($args);
+        /**
+        * @var iterable<array<int, scalar|array>>
+        */
+        $sources = $this->DataProviderCollection();
 
-            $static = new StaticMethodCollector($staticMethods, $interfaces);
-
-            yield array_merge([$static], $args);
-
-            $semi = new Fixtures\SemiResettingStaticMethodCollector($staticMethods, $interfaces);
-
-            yield array_merge([$semi], $args);
-        }
-    }
-
-    public function DataProviderCollectorsNonResetting() : Generator
-    {
-        foreach ($this->DataProviderCollection() as $args) {
-            $staticMethods = array_shift($args);
-            $interfaces = array_shift($args);
-
-            $static = new StaticMethodCollector($staticMethods, $interfaces, false);
-
-            yield array_merge([$static], $args);
-
-            $semi = new Fixtures\SemiResettingStaticMethodCollector(
-                $staticMethods,
-                $interfaces,
-                false
-            );
-
-            yield array_merge([$semi], $args);
+        foreach ($sources as $args) {
+            yield array_merge([true], $args);
+            yield array_merge([false], $args);
         }
     }
 
     /**
-    * @dataProvider DataProviderCollectors
+    * @dataProvider DataProviderCollectionToggle
     */
     public function testCollection(
-        StaticMethodCollector $collector,
+        bool $semiResetting,
+        array $staticMethods,
+        array $interfaces,
         array $expectedResult,
         string ...$implementations
     ) : void {
+        $collector =
+            $semiResetting
+                ? new StaticMethodCollector($staticMethods, $interfaces)
+                : new Fixtures\SemiResettingStaticMethodCollector($staticMethods, $interfaces);
+
         $collection = $collector->Collect(...$implementations);
 
         static::assertSame($expectedResult, iterator_to_array($collection));
@@ -99,13 +98,24 @@ class StaticMethodCollectorTest extends Base
     }
 
     /**
-    * @dataProvider DataProviderCollectorsNonResetting
+    * @dataProvider DataProviderCollectionToggle
     */
     public function testCollectionWithoutResettingProcessedSources(
-        StaticMethodCollector $collector,
+        bool $semiResetting,
+        array $staticMethods,
+        array $interfaces,
         array $expectedResult,
         string ...$implementations
     ) : void {
+        $collector =
+            $semiResetting
+                ? new StaticMethodCollector($staticMethods, $interfaces, false)
+                : new Fixtures\SemiResettingStaticMethodCollector(
+                    $staticMethods,
+                    $interfaces,
+                    false
+                );
+
         $collection = $collector->Collect(...$implementations);
 
         static::assertSame($expectedResult, iterator_to_array($collection));

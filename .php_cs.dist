@@ -10,5 +10,6 @@ namespace SignpostMarv\CS;
 
 return ConfigUsedWithPhpstan::createWithPaths(
     __FILE__,
+    __DIR__ . '/Tests/',
     __DIR__ . '/src/'
 );
