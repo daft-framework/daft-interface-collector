@@ -41,37 +41,71 @@ class StaticMethodCollectorTest extends Base
         ];
     }
 
-    /**
-    * @dataProvider DataProviderCollection
-    */
-    public function testCollection(
-        array $staticMethods,
-        array $interfaces,
-        array $expectedResult,
-        string ...$implementations
-    ) : void {
-        $collector = new StaticMethodCollector($staticMethods, $interfaces);
+    public function DataProviderCollectors() : Generator
+    {
+        foreach ($this->DataProviderCollection() as $args) {
+            $staticMethods = array_shift($args);
+            $interfaces = array_shift($args);
 
-        $collection = $collector->Collect(...$implementations);
+            $static = new StaticMethodCollector($staticMethods, $interfaces);
 
-        static::assertSame($expectedResult, iterator_to_array($collection));
+            yield array_merge([$static], $args);
 
-        $collection = $collector->Collect(...$implementations);
+            $semi = new Fixtures\SemiResettingStaticMethodCollector($staticMethods, $interfaces);
 
-        static::assertSame($expectedResult, iterator_to_array($collection));
+            yield array_merge([$semi], $args);
+        }
+    }
+
+    public function DataProviderCollectorsNonResetting() : Generator
+    {
+        foreach ($this->DataProviderCollection() as $args) {
+            $staticMethods = array_shift($args);
+            $interfaces = array_shift($args);
+
+            $static = new StaticMethodCollector($staticMethods, $interfaces, false);
+
+            yield array_merge([$static], $args);
+
+            $semi = new Fixtures\SemiResettingStaticMethodCollector(
+                $staticMethods,
+                $interfaces,
+                false
+            );
+
+            yield array_merge([$semi], $args);
+        }
     }
 
     /**
-    * @dataProvider DataProviderCollection
+    * @dataProvider DataProviderCollectors
     */
-    public function testCollectionWithoutResettingProcessedSources(
-        array $staticMethods,
-        array $interfaces,
+    public function testCollection(
+        StaticMethodCollector $collector,
         array $expectedResult,
         string ...$implementations
     ) : void {
-        $collector = new StaticMethodCollector($staticMethods, $interfaces, false);
+        $collection = $collector->Collect(...$implementations);
 
+        static::assertSame($expectedResult, iterator_to_array($collection));
+
+        $collection = $collector->Collect(...$implementations);
+
+        if ( ! ($collector instanceof Fixtures\SemiResettingStaticMethodCollector)) {
+        static::assertSame($expectedResult, iterator_to_array($collection));
+        } else {
+            static::assertSame([], iterator_to_array($collection));
+        }
+    }
+
+    /**
+    * @dataProvider DataProviderCollectorsNonResetting
+    */
+    public function testCollectionWithoutResettingProcessedSources(
+        StaticMethodCollector $collector,
+        array $expectedResult,
+        string ...$implementations
+    ) : void {
         $collection = $collector->Collect(...$implementations);
 
         static::assertSame($expectedResult, iterator_to_array($collection));

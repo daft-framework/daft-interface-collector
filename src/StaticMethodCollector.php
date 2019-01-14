@@ -34,17 +34,17 @@ class StaticMethodCollector
     /**
     * @var array<int, string>
     */
-    private $processedSources = [];
+    protected $processedSources = [];
 
     /**
     * @var string[]
     */
-    private $alreadyYielded = [];
+    protected $alreadyYielded = [];
 
     /**
     * @var bool
     */
-    private $autoReset;
+    protected $autoReset;
 
     public function __construct(array $staticMethods, array $interfaces, bool $autoReset = true)
     {
