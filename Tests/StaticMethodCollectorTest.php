@@ -69,6 +69,8 @@ class StaticMethodCollectorTest extends Base
     }
 
     /**
+    * @param class-string ...$implementations
+    *
     * @dataProvider DataProviderCollectionToggle
     */
     public function testCollection(
@@ -97,6 +99,8 @@ class StaticMethodCollectorTest extends Base
     }
 
     /**
+    * @param class-string ...$implementations
+    *
     * @dataProvider DataProviderCollectionToggle
     */
     public function testCollectionWithoutResettingProcessedSources(
