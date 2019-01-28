@@ -200,8 +200,9 @@ class StaticMethodCollector
             * @param class-string $interface
             */
             function (string $interface) use ($implementation) : bool {
-            return static::IsStringA($implementation, $interface);
-        });
+                return static::IsStringA($implementation, $interface);
+            }
+        );
     }
 
     /**
@@ -227,8 +228,9 @@ class StaticMethodCollector
         $strings = array_filter(
             array_filter($interfaces, 'is_string'),
             function (string $maybe) : bool {
-            return interface_exists($maybe) || class_exists($maybe);
-        });
+                return interface_exists($maybe) || class_exists($maybe);
+            }
+        );
 
         return $strings;
     }
