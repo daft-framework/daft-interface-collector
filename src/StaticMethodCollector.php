@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace SignpostMarv\DaftInterfaceCollector;
 
 use Closure;
-use InvalidArgumentException;
 use Generator;
+use InvalidArgumentException;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionNamedType;
