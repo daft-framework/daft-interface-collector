@@ -66,7 +66,6 @@ class StaticMethodCollectorTest extends Base
         $sources = $this->DataProviderCollection();
 
         foreach ($sources as $args) {
-
             /**
             * @psalm-var array{0:bool, 1:string[], 2:array<class-string, array<string, array<int, class-string>>>, 3:class-string[], 4:class-string[], 5:string}
             */
