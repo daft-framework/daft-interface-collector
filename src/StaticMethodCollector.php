@@ -27,12 +27,16 @@ class StaticMethodCollector
     const EXPECTED_NUMBER_OF_REQUIRED_PARAMETERS = 0;
 
     /**
-    * @var array<int, class-string>
+    * @var array<int, string>
+    *
+    * @psalm-var array<int, class-string>
     */
     protected $processedSources = [];
 
     /**
-    * @var class-string[]
+    * @var string[]
+    *
+    * @psalm-var class-string[]
     */
     protected $alreadyYielded = [];
 
@@ -47,7 +51,9 @@ class StaticMethodCollector
     private $staticMethods = [];
 
     /**
-    * @var class-string[]
+    * @var string[]
+    *
+    * @psalm-var class-string[]
     */
     private $interfaces = [];
 

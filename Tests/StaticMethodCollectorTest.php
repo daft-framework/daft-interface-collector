@@ -83,7 +83,9 @@ class StaticMethodCollectorTest extends Base
     }
 
     /**
-    * @param class-string ...$implementations
+    * @param string ...$implementations
+    *
+    * @psalm-param class-string ...$implementations
     *
     * @dataProvider DataProviderCollectionToggle
     */
@@ -113,7 +115,9 @@ class StaticMethodCollectorTest extends Base
     }
 
     /**
-    * @param class-string ...$implementations
+    * @param string ...$implementations
+    *
+    * @psalm-param class-string ...$implementations
     *
     * @dataProvider DataProviderCollectionToggle
     */
