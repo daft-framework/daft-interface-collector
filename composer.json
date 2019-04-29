@@ -27,7 +27,7 @@
         "tests": [
             "phpunit -vvvv --coverage-clover=phpunit.clover",
             "phpstan analyse -c ./phpstan.neon .php_cs.dist src Tests",
-            "psalm --shepherd",
+            "psalm --shepherd --find-dead-code",
             "phpcpd src Tests",
             "phpmnd ./ --exclude=./phpunit/ --exclude=./vendor/ --non-zero-exit-on-violation --hint",
             "composer-require-checker check ./composer.json",
@@ -47,6 +47,7 @@
         "phpstan/phpstan-strict-rules": "^0.11.0",
         "phpunit/phpunit": "^7.5",
         "povils/phpmnd": "^2.1",
+        "psalm/plugin-phpunit": "^0.5.5",
         "roave/security-advisories": "dev-master",
         "sebastian/phpcpd": "^4.1",
         "signpostmarv/php-cs-fixer-config": "^0.9.0",
