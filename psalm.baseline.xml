@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files/>
+<files>
+  <file src="src\StaticMethodCollector.php">
+    <MixedMethodCall occurrences="1">
+      <code>$implementation::$method()</code>
+    </MixedMethodCall>
+  </file>
+</files>
