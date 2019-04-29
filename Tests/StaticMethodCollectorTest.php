@@ -55,6 +55,9 @@ class StaticMethodCollectorTest extends Base
         ];
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:bool, 1:string[], 2:array<class-string, array<string, array<int, class-string>>>, 3:class-string[], 4:class-string[], 5:string}, mixed, void>
+    */
     public function DataProviderCollectionToggle() : Generator
     {
         /**
@@ -63,8 +66,20 @@ class StaticMethodCollectorTest extends Base
         $sources = $this->DataProviderCollection();
 
         foreach ($sources as $args) {
-            yield array_merge([true], $args);
-            yield array_merge([false], $args);
+
+            /**
+            * @psalm-var array{0:bool, 1:string[], 2:array<class-string, array<string, array<int, class-string>>>, 3:class-string[], 4:class-string[], 5:string}
+            */
+            $out = array_merge([true], $args);
+
+            yield $out;
+
+            /**
+            * @psalm-var array{0:bool, 1:string[], 2:array<class-string, array<string, array<int, class-string>>>, 3:class-string[], 4:class-string[], 5:string}
+            */
+            $out = array_merge([false], $args);
+
+            yield $out;
         }
     }
 

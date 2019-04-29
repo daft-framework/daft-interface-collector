@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files>
+  <file src="Tests\Fixtures\DaftMiddleware.php">
+    <PossiblyUnusedMethod occurrences="2">
+      <code>DaftRouterMiddlewareHandler</code>
+      <code>DaftRouterRoutePrefixExceptions</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="Tests\Fixtures\DaftRoute.php">
+    <PossiblyUnusedMethod occurrences="3">
+      <code>DaftRouterHandleRequest</code>
+      <code>DaftRouterRoutes</code>
+      <code>DaftRouterHttpRoute</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="Tests\Fixtures\DaftSource.php">
+    <PossiblyUnusedMethod occurrences="1">
+      <code>DaftRouterRouteAndMiddlewareSources</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src\StaticMethodCollector.php">
     <MixedMethodCall occurrences="1">
       <code>$implementation::$method()</code>
     </MixedMethodCall>
+    <UnusedVariable occurrences="1">
+      <code>$type</code>
+    </UnusedVariable>
   </file>
 </files>
