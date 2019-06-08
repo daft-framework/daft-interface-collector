@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files>
+<files psalm-version="3.4.2@f327d75116a15e88431668c36b9613f1e3dd62a4">
   <file src="Tests\Fixtures\DaftMiddleware.php">
     <PossiblyUnusedMethod occurrences="2">
       <code>DaftRouterMiddlewareHandler</code>
