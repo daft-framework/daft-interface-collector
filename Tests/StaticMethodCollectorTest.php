@@ -28,6 +28,9 @@ class StaticMethodCollectorTest extends Base
     */
     protected $runTestInSeparateProcess = false;
 
+    /**
+    * @return Generator<int, array{0:array<class-string, array<string, array<int, class-string>>>, 1:array<int, class-string>, 2:array<int, class-string>, 3:class-string}, mixed, void>
+    */
     public function DataProviderCollection() : Generator
     {
         yield from [
@@ -56,7 +59,7 @@ class StaticMethodCollectorTest extends Base
     }
 
     /**
-    * @psalm-return Generator<int, array{0:bool, 1:string[], 2:array<class-string, array<string, array<int, class-string>>>, 3:class-string[], 4:class-string[], 5:string}, mixed, void>
+    * @return Generator<int, array{0:bool, 1:array<class-string, array<string, array<int, class-string>>>, 2:array<int, class-string>, 3:array<int, class-string>, 4:class-string}, mixed, void>
     */
     public function DataProviderCollectionToggle() : Generator
     {
@@ -67,14 +70,14 @@ class StaticMethodCollectorTest extends Base
 
         foreach ($sources as $args) {
             /**
-            * @psalm-var array{0:bool, 1:string[], 2:array<class-string, array<string, array<int, class-string>>>, 3:class-string[], 4:class-string[], 5:string}
+            * @var array{0:true, 1:array<class-string, array<string, array<int, class-string>>>, 2:array<int, class-string>, 3:array<int, class-string>, 4:class-string}
             */
             $out = array_merge([true], $args);
 
             yield $out;
 
             /**
-            * @psalm-var array{0:bool, 1:string[], 2:array<class-string, array<string, array<int, class-string>>>, 3:class-string[], 4:class-string[], 5:string}
+            * @var array{0:false, 1:array<class-string, array<string, array<int, class-string>>>, 2:array<int, class-string>, 3:array<int, class-string>, 4:class-string}
             */
             $out = array_merge([false], $args);
 
@@ -83,9 +86,9 @@ class StaticMethodCollectorTest extends Base
     }
 
     /**
-    * @param string ...$implementations
-    *
-    * @psalm-param class-string ...$implementations
+    * @param array<class-string, array<string, array<int, class-string>>> $staticMethods
+    * @param array<int, class-string> $interfaces
+    * @param class-string ...$implementations
     *
     * @dataProvider DataProviderCollectionToggle
     */
@@ -115,6 +118,9 @@ class StaticMethodCollectorTest extends Base
     }
 
     /**
+    * @param array<class-string, array<string, array<int, class-string>>> $staticMethods
+    * @param array<int, class-string> $interfaces
+    * @param array<int, class-string> $expectedResult
     * @param string ...$implementations
     *
     * @psalm-param class-string ...$implementations

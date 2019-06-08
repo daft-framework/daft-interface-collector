@@ -27,16 +27,12 @@ class StaticMethodCollector
     const EXPECTED_NUMBER_OF_REQUIRED_PARAMETERS = 0;
 
     /**
-    * @var array<int, string>
-    *
-    * @psalm-var array<int, class-string>
+    * @var array<int, class-string>
     */
     protected $processedSources = [];
 
     /**
-    * @var string[]
-    *
-    * @psalm-var class-string[]
+    * @var array<int, class-string>
     */
     protected $alreadyYielded = [];
 
@@ -51,12 +47,14 @@ class StaticMethodCollector
     private $staticMethods = [];
 
     /**
-    * @var string[]
-    *
-    * @psalm-var class-string[]
+    * @var array<int, class-string>
     */
     private $interfaces = [];
 
+    /**
+    * @param array<class-string, array<string, array<int, class-string>>> $staticMethods
+    * @param array<int, class-string> $interfaces
+    */
     public function __construct(
         array $staticMethods,
         array $interfaces,
@@ -112,7 +110,11 @@ class StaticMethodCollector
     }
 
     /**
-    * @param class-string $implementation
+    * @template T as object
+    *
+    * @param class-string<T> $implementation
+    *
+    * @return Generator<int, class-string<T>, mixed, void>
     */
     final protected function CollectInterfacesFromImplementationCheckInterfaces(
         string $implementation
@@ -212,27 +214,17 @@ class StaticMethodCollector
     }
 
     /**
-    * @return string[]|array<string, mixed>
-    */
-    final protected function FilterArrayOfInterfaces(
-        array $interfaces,
-        int $flag = self::DEFAULT_INT_ARRAY_FILTER_FLAG
-    ) : array {
-        $strings = array_filter($interfaces, 'is_string', $flag);
-
-        return array_filter($strings, 'interface_exists', $flag);
-    }
-
-    /**
-    * @return class-string[]
+    * @param array<int, class-string> $interfaces
+    *
+    * @return array<int, class-string>
     */
     final protected function FilterArrayOfInterfacesOrClasses(array $interfaces) : array
     {
         /**
-        * @var class-string[]
+        * @var array<int, class-string>
         */
         $strings = array_filter(
-            array_filter($interfaces, 'is_string'),
+            $interfaces,
             function (string $maybe) : bool {
                 return interface_exists($maybe) || class_exists($maybe);
             }
@@ -242,19 +234,19 @@ class StaticMethodCollector
     }
 
     /**
-    * @return array<class-string, array>
+    * @param array<class-string, array<string, array<int, class-string>>> $interfaces
+    *
+    * @return array<class-string, array<string, array<int, class-string>>>
     */
     final protected function FilterArrayOfInterfaceOffsets(array $interfaces) : array
     {
-        /**
-        * @var array<class-string, array>
-        */
-        $strings = array_filter(
-            $this->FilterArrayOfInterfaces($interfaces, ARRAY_FILTER_USE_KEY),
-            'is_array'
+        return array_filter(
+            $interfaces,
+            function (string $maybe) : bool {
+                return interface_exists($maybe);
+            },
+            ARRAY_FILTER_USE_KEY
         );
-
-        return $strings;
     }
 
     /**
@@ -292,6 +284,7 @@ class StaticMethodCollector
 
     /**
     * @param class-string $interface
+    * @param array<string, array<int, class-string>> $methods
     *
     * @return array<class-string, string[]>
     */

@@ -2,10 +2,7 @@ build:
   nodes:
     php71:
       environment:
-        php: 7.1
-    php72:
-      environment:
-        php: 7.2
+        php: 7.3
     analysis:
       project_setup:
         override: true
@@ -22,7 +19,6 @@ build:
 checks:
   php:
     code_rating: true
-    duplication: true
 
 filter:
   excluded_paths:
