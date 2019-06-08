@@ -75,6 +75,8 @@ class StaticMethodCollector
 
     /**
     * @param class-string ...$implementations
+    *
+    * @return Generator<int, class-string, mixed, void>
     */
     public function Collect(string ...$implementations) : Generator
     {
@@ -88,6 +90,8 @@ class StaticMethodCollector
 
     /**
     * @param class-string ...$implementations
+    *
+    * @return Generator<int, class-string, mixed, void>
     */
     protected function CollectInterfaces(string ...$implementations) : Generator
     {
@@ -140,6 +144,8 @@ class StaticMethodCollector
 
     /**
     * @param class-string $implementation
+    *
+    * @return Generator<int, class-string, mixed, void>
     */
     final protected function CollectInterfacesFromImplementation(string $implementation) : Generator
     {
@@ -159,6 +165,8 @@ class StaticMethodCollector
     /**
     * @param class-string $implementation
     * @param array<int, class-string> $types
+    *
+    * @return Generator<int, class-string, mixed, void>
     */
     final protected function CollectInterfacesFromImplementationTypes(
         string $implementation,
