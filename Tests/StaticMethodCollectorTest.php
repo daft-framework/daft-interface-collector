@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace SignpostMarv\DaftInterfaceCollector\Tests;
 
 use Generator;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase as Base;
 use SignpostMarv\DaftInterfaceCollector\StaticMethodCollector;
 
@@ -150,5 +151,21 @@ class StaticMethodCollectorTest extends Base
         $collection = $collector->Collect(...$implementations);
 
         static::assertSame([], iterator_to_array($collection));
+    }
+
+    public function testCollectInterfacesFromImplementationTypesFails() : void
+    {
+        $collector = new Fixtures\StaticMethodCollector\PublicCollectInterfacesFromImplementationTypes(
+            [],
+            []
+        );
+
+        static::expectException(InvalidArgumentException::class);
+
+        $collector->PublicCollectInterfacesFromImplementationTypes(
+            Generator::class,
+            'foo',
+            []
+        )->valid();
     }
 }
