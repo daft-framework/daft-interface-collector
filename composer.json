@@ -24,9 +24,15 @@
         "sort-packages": true
     },
     "scripts": {
+        "phpunit": [
+            "phpunit -vvvv --coverage-clover=phpunit.clover"
+        ],
         "tests": [
-            "phpunit -vvvv --coverage-clover=phpunit.clover",
-            "psalm --shepherd --find-dead-code",
+            "@phpunit",
+            "@static-analysis"
+        ],
+        "static-analysis": [
+            "psalm --shepherd",
             "phpcpd src Tests",
             "phpmnd ./ --exclude=./phpunit/ --exclude=./vendor/ --non-zero-exit-on-violation --hint",
             "composer-require-checker check ./composer.json",
@@ -39,14 +45,14 @@
     },
     "require-dev": {
         "bmitch/churn-php": "^1.0",
-        "infection/infection": "^0.13.1",
+        "infection/infection": "^0.13.4",
         "maglnet/composer-require-checker": "^2.0",
         "phpunit/phpunit": "^8.2",
         "povils/phpmnd": "^2.1",
         "psalm/plugin-phpunit": "^0.6.0",
         "roave/security-advisories": "dev-master",
         "sebastian/phpcpd": "^4.1",
-        "signpostmarv/php-cs-fixer-config": "^0.9.0",
+        "signpostmarv/php-cs-fixer-config": "^0.10.0",
         "vimeo/psalm": "^3.4"
     }
 }

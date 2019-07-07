@@ -13,3 +13,6 @@ indent_size = 2
 
 [*.yml]
 indent_size = 2
+
+[psalm.baseline.xml]
+indent_size = 2
