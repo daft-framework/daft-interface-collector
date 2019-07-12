@@ -14,6 +14,7 @@
     iconv:7.3.7;
     json:1.7.0;
     libxml:7.3.7;
+    mbstring:7.3.7;
     mysqlnd:mysqlnd 5.0.12-dev - 20150407 - $Id: 7cc7cc96e675f6d72e5cf0f267f48e167c2abb23 $;
     openssl:7.3.7;
     pcre:7.3.7;
