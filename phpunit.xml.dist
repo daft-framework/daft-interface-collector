@@ -1,24 +1,24 @@
 <phpunit bootstrap="./vendor/autoload.php">
-  <testsuites>
-    <testsuite name="DaftInterfaceCollector">
-      <directory>./Tests/</directory>
-    </testsuite>
-  </testsuites>
-  <logging>
-    <log
-      type="coverage-html"
-      target="phpunit"
-    />
-    <log
-      type="coverage-text"
-      target="php://stdout"
-      showUncoveredFiles="true"
-      showOnlySummary="false"
-    />
-  </logging>
-  <filter>
-    <whitelist processUncoveredFilesFromWhitelist="true">
-      <directory suffix=".php">./src/</directory>
-    </whitelist>
-  </filter>
+	<testsuites>
+		<testsuite name="DaftInterfaceCollector">
+			<directory>./Tests/</directory>
+		</testsuite>
+	</testsuites>
+	<logging>
+		<log
+			type="coverage-html"
+			target="phpunit"
+		/>
+		<log
+			type="coverage-text"
+			target="php://stdout"
+			showUncoveredFiles="true"
+			showOnlySummary="false"
+		/>
+	</logging>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">./src/</directory>
+		</whitelist>
+	</filter>
 </phpunit>

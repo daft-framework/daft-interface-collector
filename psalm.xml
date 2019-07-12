@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <psalm
-    totallyTyped="true"
-    findUnusedCode="true"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="https://getpsalm.org/schema/config"
-    xsi:schemaLocation="https://getpsalm.org/schema/config ./vendor/vimeo/psalm/config.xsd"
-    errorBaseline="./psalm.baseline.xml"
-    includePhpVersionsInErrorBaseline="true"
+	totallyTyped="true"
+	findUnusedCode="true"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="https://getpsalm.org/schema/config"
+	xsi:schemaLocation="https://getpsalm.org/schema/config ./vendor/vimeo/psalm/config.xsd"
+	errorBaseline="./psalm.baseline.xml"
+	includePhpVersionsInErrorBaseline="true"
 >
-    <projectFiles>
-        <file name=".php_cs.dist" />
-        <directory name="src" />
-        <directory name="Tests" />
-    </projectFiles>
+	<projectFiles>
+		<file name=".php_cs.dist" />
+		<directory name="src" />
+		<directory name="Tests" />
+	</projectFiles>
 
-    <issueHandlers>
-    </issueHandlers>
-    <plugins>
-        <pluginClass class="Psalm\PhpUnitPlugin\Plugin" />
-    </plugins>
+	<issueHandlers>
+	</issueHandlers>
+	<plugins>
+		<pluginClass class="Psalm\PhpUnitPlugin\Plugin" />
+	</plugins>
 </psalm>

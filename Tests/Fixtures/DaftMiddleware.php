@@ -8,13 +8,13 @@ namespace SignpostMarv\DaftInterfaceCollector\Tests\Fixtures;
 
 interface DaftMiddleware
 {
-    public static function DaftRouterMiddlewareHandler(
-        Request $request,
-        ? Response $response
-    ) : ? Response;
+	public static function DaftRouterMiddlewareHandler(
+		Request $request,
+		? Response $response
+	) : ? Response;
 
-    /**
-    * @return array<int, string> URI prefixes
-    */
-    public static function DaftRouterRoutePrefixExceptions() : array;
+	/**
+	* @return array<int, string> URI prefixes
+	*/
+	public static function DaftRouterRoutePrefixExceptions() : array;
 }

@@ -12,21 +12,21 @@ use SignpostMarv\DaftInterfaceCollector\StaticMethodCollector as Base;
 
 class PublicCollectInterfacesFromImplementationTypes extends Base
 {
-    /**
-    * @param class-string $implementation
-    * @param array<int, class-string> $types
-    *
-    * @return Generator<int, class-string, mixed, void>
-    */
-    public function PublicCollectInterfacesFromImplementationTypes(
-        string $implementation,
-        string $method,
-        array $types
-    ) : Generator {
-        return $this->CollectInterfacesFromImplementationTypes(
-            $implementation,
-            $method,
-            $types
-        );
-    }
+	/**
+	* @param class-string $implementation
+	* @param array<int, class-string> $types
+	*
+	* @return Generator<int, class-string, mixed, void>
+	*/
+	public function PublicCollectInterfacesFromImplementationTypes(
+		string $implementation,
+		string $method,
+		array $types
+	) : Generator {
+		return $this->CollectInterfacesFromImplementationTypes(
+			$implementation,
+			$method,
+			$types
+		);
+	}
 }

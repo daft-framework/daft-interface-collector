@@ -11,15 +11,15 @@ use SignpostMarv\DaftInterfaceCollector\StaticMethodCollector as Base;
 
 class SemiResettingStaticMethodCollector extends Base
 {
-    /**
-    * @param class-string ...$implementations
-    */
-    public function Collect(string ...$implementations) : Generator
-    {
-        if ($this->autoReset) {
-            $this->processedSources = [];
-        }
+	/**
+	* @param class-string ...$implementations
+	*/
+	public function Collect(string ...$implementations) : Generator
+	{
+		if ($this->autoReset) {
+			$this->processedSources = [];
+		}
 
-        yield from $this->CollectInterfaces(...$implementations);
-    }
+		yield from $this->CollectInterfaces(...$implementations);
+	}
 }
