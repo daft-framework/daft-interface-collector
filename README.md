@@ -1,4 +1,4 @@
-Copyright 2018 SignpostMarv
+Copyright 2019 SignpostMarv
 
 # daft-interface-collector
 [![Coverage Status](https://coveralls.io/repos/github/SignpostMarv/daft-interface-collector/badge.svg?branch=master)](https://coveralls.io/github/SignpostMarv/daft-interface-collector?branch=master)
