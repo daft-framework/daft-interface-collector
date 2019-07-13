@@ -1,9 +1,8 @@
 Copyright 2018 SignpostMarv
 
 # daft-interface-collector
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SignpostMarv/daft-interface-collector/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SignpostMarv/daft-interface-collector/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/SignpostMarv/daft-interface-collector/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SignpostMarv/daft-interface-collector/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/SignpostMarv/daft-interface-collector/badges/build.png?b=master)](https://scrutinizer-ci.com/g/SignpostMarv/daft-interface-collector/build-status/master)
+[![Coverage Status](https://coveralls.io/repos/github/SignpostMarv/daft-interface-collector/badge.svg?branch=master)](https://coveralls.io/github/SignpostMarv/daft-interface-collector?branch=master)
+[![Build Status](https://travis-ci.org/SignpostMarv/daft-interface-collector.svg?branch=master)](https://travis-ci.org/SignpostMarv/daft-interface-collector)
 
 I needed to abstract out some interface collection code. Because reasons.
 
