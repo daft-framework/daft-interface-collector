@@ -3,6 +3,7 @@ Copyright 2018 SignpostMarv
 # daft-interface-collector
 [![Coverage Status](https://coveralls.io/repos/github/SignpostMarv/daft-interface-collector/badge.svg?branch=master)](https://coveralls.io/github/SignpostMarv/daft-interface-collector?branch=master)
 [![Build Status](https://travis-ci.org/SignpostMarv/daft-interface-collector.svg?branch=master)](https://travis-ci.org/SignpostMarv/daft-interface-collector)
+[![Type Coverage](https://shepherd.dev/github/signpostmarv/daft-interface-collector/coverage.svg)](https://shepherd.dev/github/signpostmarv/daft-interface-collector)
 
 I needed to abstract out some interface collection code. Because reasons.
 
