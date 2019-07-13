@@ -48,6 +48,7 @@
         "bmitch/churn-php": "^1.0",
         "infection/infection": "^0.13.4",
         "maglnet/composer-require-checker": "^2.0",
+        "php-coveralls/php-coveralls": "^2.1",
         "phpunit/phpunit": "^8.2",
         "povils/phpmnd": "^2.1",
         "psalm/plugin-phpunit": "^0.7.0",

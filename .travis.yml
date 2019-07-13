@@ -1,0 +1,14 @@
+dist: xenial
+language: php
+php:
+  - 7.3
+cache:
+  directories:
+    - ./vendor/
+install:
+  - travis_retry composer install --no-interaction --no-suggest --prefer-source
+script:
+  - composer run tests
+  - ./vendor/bin/php-coveralls
+matrix:
+  fast_finish: true
