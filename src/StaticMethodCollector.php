@@ -228,17 +228,12 @@ class StaticMethodCollector
 	*/
 	final protected function FilterArrayOfInterfacesOrClasses(array $interfaces) : array
 	{
-		/**
-		* @var array<int, class-string>
-		*/
-		$strings = array_filter(
+		return array_filter(
 			$interfaces,
 			function (string $maybe) : bool {
 				return interface_exists($maybe) || class_exists($maybe);
 			}
 		);
-
-		return $strings;
 	}
 
 	/**
@@ -282,9 +277,6 @@ class StaticMethodCollector
 
 	final protected function FilterReflectionReturnType(? ReflectionType $refReturn) : bool
 	{
-		/**
-		* @var string|class-string
-		*/
 		$refReturnName = ($refReturn instanceof ReflectionNamedType) ? $refReturn->getName() : '';
 
 		return 'array' === $refReturnName || static::IsStringA($refReturnName, Traversable::class);
