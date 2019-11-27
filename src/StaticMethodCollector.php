@@ -29,27 +29,24 @@ class StaticMethodCollector
 	/**
 	* @var array<int, class-string>
 	*/
-	protected $processedSources = [];
+	protected array $processedSources = [];
 
 	/**
 	* @var array<int, class-string>
 	*/
-	protected $alreadyYielded = [];
+	protected array $alreadyYielded = [];
 
-	/**
-	* @var bool
-	*/
-	protected $autoReset;
+	protected bool $autoReset;
 
 	/**
 	* @var array<class-string, array<string, array<int, class-string>>>
 	*/
-	private $staticMethods = [];
+	private array $staticMethods = [];
 
 	/**
 	* @var array<int, class-string>
 	*/
-	private $interfaces = [];
+	private array $interfaces = [];
 
 	/**
 	* @param array<class-string, array<string, array<int, class-string>>> $staticMethods

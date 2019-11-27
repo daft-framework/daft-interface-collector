@@ -1,44 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files
-  psalm-version="3.6.5@b1aae0d1a5a11908e0e5f9eb6795ab7bb3f43577"
+  psalm-version="3.7.0@a154191922d14dcdde8ef348520a88d735d82304"
   php-version="
-    php:7.3.9;
-    bcmath:7.3.9;
-    calendar:7.3.9;
-    Core:7.3.9;
-    ctype:7.3.9;
-    curl:7.3.8;
-    date:7.3.9;
+    php:7.4.0;
+    bcmath:7.4.0;
+    calendar:7.4.0;
+    Core:7.4.0;
+    ctype:7.4.0;
+    curl:7.4.0;
+    date:7.4.0;
     dom:20031129;
-    filter:7.3.9;
-    gd:7.3.8;
-    hash:7.3.9;
-    iconv:7.3.9;
-    intl:7.3.8;
-    json:1.7.0;
-    libxml:7.3.9;
-    mbstring:7.3.8;
-    mysqli:7.3.8;
-    mysqlnd:mysqlnd 5.0.12-dev - 20150407 - $Id: 7cc7cc96e675f6d72e5cf0f267f48e167c2abb23 $;
-    openssl:7.3.8;
-    pcre:7.3.9;
-    PDO:7.3.9;
-    pdo_sqlite:7.3.8;
-    Phar:7.3.9;
-    readline:7.3.9;
-    Reflection:7.3.9;
-    session:7.3.9;
-    SimpleXML:7.3.9;
-    sodium:7.3.8;
-    SPL:7.3.9;
-    standard:7.3.9;
-    tokenizer:7.3.9;
-    wddx:7.3.9;
-    xml:7.3.9;
-    xmlreader:7.3.9;
-    xmlwriter:7.3.9;
-    zip:1.15.4;
-    zlib:7.3.9
+    filter:7.4.0;
+    gd:7.4.0;
+    hash:7.4.0;
+    iconv:7.4.0;
+    intl:7.4.0;
+    json:7.4.0;
+    libxml:7.4.0;
+    mbstring:7.4.0;
+    mysqli:7.4.0;
+    mysqlnd:mysqlnd 7.4.0;
+    openssl:7.4.0;
+    pcre:7.4.0;
+    PDO:7.4.0;
+    pdo_sqlite:7.4.0;
+    Phar:7.4.0;
+    readline:7.4.0;
+    Reflection:7.4.0;
+    session:7.4.0;
+    SimpleXML:7.4.0;
+    sodium:7.4.0;
+    SPL:7.4.0;
+    standard:7.4.0;
+    tokenizer:7.4.0;
+    xml:7.4.0;
+    xmlreader:7.4.0;
+    xmlwriter:7.4.0;
+    zip:1.15.5;
+    zlib:7.4.0
   "
 >
   <file src="Tests/Fixtures/DaftMiddleware.php">
