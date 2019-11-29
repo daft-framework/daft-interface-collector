@@ -23,6 +23,9 @@
         "classmap-authoritative": true,
         "sort-packages": true
     },
+	"conflict": {
+		"vimeo/psalm": "<3.7"
+	},
     "scripts": {
         "phpunit": [
             "phpunit -vvvv --coverage-clover=phpunit.clover"
