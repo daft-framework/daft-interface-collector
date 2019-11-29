@@ -310,14 +310,12 @@ class StaticMethodCollector
 		/**
 		* @var array<class-string, array<string, array<int, class-string>>>
 		*/
-		$out = array_filter(
+		return array_filter(
 			$in,
 			function (array $val) : bool {
 				return count($val) > self::INT_FILTER_NON_EMPTY_ARRAY;
 			}
 		);
-
-		return $out;
 	}
 
 	/**
