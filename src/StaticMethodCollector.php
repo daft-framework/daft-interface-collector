@@ -207,6 +207,9 @@ class StaticMethodCollector
 	*/
 	final protected function FilterIsA(string $implementation, array $interfaces) : array
 	{
+		/**
+		* @var array<int, T::class>
+		*/
 		return array_filter(
 			$interfaces,
 			/**

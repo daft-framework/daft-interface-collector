@@ -24,7 +24,7 @@
         "sort-packages": true
     },
 	"conflict": {
-		"vimeo/psalm": "<3.7"
+		"vimeo/psalm": "<3.8"
 	},
     "scripts": {
         "phpunit": [
@@ -49,15 +49,15 @@
     "require-dev": {
         "ext-mbstring": "*",
         "bmitch/churn-php": "^1.0",
-        "infection/infection": "^0.14.4",
+        "infection/infection": "^0.15.0",
         "maglnet/composer-require-checker": "^2.0",
         "php-coveralls/php-coveralls": "^2.2",
-        "phpunit/phpunit": "^8.4",
+        "phpunit/phpunit": "^8.5",
         "povils/phpmnd": "^2.1",
-        "psalm/plugin-phpunit": "^0.7.0",
+        "psalm/plugin-phpunit": "^0.8.0",
         "roave/security-advisories": "dev-master",
         "sebastian/phpcpd": "^4.1",
-        "signpostmarv/php-cs-fixer-config": "^0.13.0",
-        "vimeo/psalm": "^3.7"
+        "signpostmarv/php-cs-fixer-config": "^0.14.0",
+        "vimeo/psalm": "^3.8"
     }
 }

@@ -1,6 +1,7 @@
 dist: xenial
 language: php
 php:
+  - 7.4.0
   - 7.4
 cache:
   directories:
