@@ -93,7 +93,7 @@ class StaticMethodCollectorTest extends Base
 	*
 	* @dataProvider DataProviderCollectionToggle
 	*/
-	public function testCollection(
+	public function test_collection(
 		bool $semiResetting,
 		array $staticMethods,
 		array $interfaces,
@@ -128,7 +128,7 @@ class StaticMethodCollectorTest extends Base
 	*
 	* @dataProvider DataProviderCollectionToggle
 	*/
-	public function testCollectionWithoutResettingProcessedSources(
+	public function test_collection_without_resetting_processed_sources(
 		bool $semiResetting,
 		array $staticMethods,
 		array $interfaces,
@@ -153,7 +153,7 @@ class StaticMethodCollectorTest extends Base
 		static::assertSame([], iterator_to_array($collection));
 	}
 
-	public function testCollectInterfacesFromImplementationTypesFails() : void
+	public function test_collect_interfaces_from_implementation_types_fails() : void
 	{
 		$collector = new Fixtures\StaticMethodCollector\PublicCollectInterfacesFromImplementationTypes(
 			[],

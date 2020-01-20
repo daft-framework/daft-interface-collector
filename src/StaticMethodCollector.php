@@ -125,7 +125,7 @@ class StaticMethodCollector
 			/**
 			* @param class-string $interface
 			*/
-			function (string $interface) use ($implementation) : bool {
+			static function (string $interface) use ($implementation) : bool {
 				return static::IsStringA($implementation, $interface);
 			}
 		);
@@ -215,7 +215,7 @@ class StaticMethodCollector
 			/**
 			* @param class-string $interface
 			*/
-			function (string $interface) use ($implementation) : bool {
+			static function (string $interface) use ($implementation) : bool {
 				return static::IsStringA($implementation, $interface);
 			}
 		);
@@ -230,7 +230,7 @@ class StaticMethodCollector
 	{
 		return array_filter(
 			$interfaces,
-			function (string $maybe) : bool {
+			static function (string $maybe) : bool {
 				return interface_exists($maybe) || class_exists($maybe);
 			}
 		);
@@ -245,7 +245,7 @@ class StaticMethodCollector
 	{
 		return array_filter(
 			$interfaces,
-			function (string $maybe) : bool {
+			static function (string $maybe) : bool {
 				return interface_exists($maybe);
 			},
 			ARRAY_FILTER_USE_KEY
@@ -315,7 +315,7 @@ class StaticMethodCollector
 		*/
 		return array_filter(
 			$in,
-			function (array $val) : bool {
+			static function (array $val) : bool {
 				return count($val) > self::INT_FILTER_NON_EMPTY_ARRAY;
 			}
 		);
