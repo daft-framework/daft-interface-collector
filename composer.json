@@ -24,7 +24,7 @@
         "sort-packages": true
     },
 	"conflict": {
-		"vimeo/psalm": "<3.8"
+		"vimeo/psalm": "<3.8.3"
 	},
     "scripts": {
         "phpunit": [

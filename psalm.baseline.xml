@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files
-  psalm-version="3.8.2@90d6b73fd8062432030ef39b7b6694b3902daa31"
+  psalm-version="3.8.3@389af1bfc739bfdff3f9e3dc7bd6499aee51a831"
   php-version="
     php:7.4.0;
     bcmath:7.4.0;
@@ -10,9 +10,11 @@
     curl:7.4.0;
     date:7.4.0;
     dom:20031129;
+    fileinfo:7.4.0;
     filter:7.4.0;
     hash:7.4.0;
     iconv:7.4.0;
+    imap:7.4.0;
     json:7.4.0;
     libxml:7.4.0;
     mbstring:7.4.0;
@@ -20,6 +22,7 @@
     openssl:7.4.0;
     pcre:7.4.0;
     PDO:7.4.0;
+    pdo_sqlite:7.4.0;
     Phar:7.4.0;
     readline:7.4.0;
     Reflection:7.4.0;
