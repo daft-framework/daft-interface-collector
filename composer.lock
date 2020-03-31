@@ -2569,12 +2569,12 @@
             "version": "0.8.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/psalm/phpunit-psalm-plugin.git",
+                "url": "https://github.com/psalm/psalm-plugin-phpunit.git",
                 "reference": "021eb5a8c1c735f820a6bfb93b7a63f1d1c2c012"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/phpunit-psalm-plugin/zipball/021eb5a8c1c735f820a6bfb93b7a63f1d1c2c012",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-phpunit/zipball/021eb5a8c1c735f820a6bfb93b7a63f1d1c2c012",
                 "reference": "021eb5a8c1c735f820a6bfb93b7a63f1d1c2c012",
                 "shasum": ""
             },

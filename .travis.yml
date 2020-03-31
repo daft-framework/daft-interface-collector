@@ -8,8 +8,11 @@ cache:
     - ./vendor/
 install:
   - travis_retry composer install --no-interaction --no-suggest --prefer-source
+  - composer update --dry-run roave/security-advisories
 script:
-  - composer run tests
+  - composer run static-analysis
+  - ./vendor/bin/psalm --show-info=false --shepherd
+  - ./vendor/bin/phpunit -vvvv --coverage-clover=phpunit.clover
   - ./vendor/bin/php-coveralls
 matrix:
   fast_finish: true

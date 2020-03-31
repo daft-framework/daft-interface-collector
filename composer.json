@@ -27,15 +27,12 @@
 		"vimeo/psalm": "<3.8.3"
 	},
     "scripts": {
-        "phpunit": [
-            "phpunit -vvvv --coverage-clover=phpunit.clover"
-        ],
         "tests": [
-            "@phpunit",
+            "phpunit -vvvv --no-coverage",
+            "psalm --show-info=false",
             "@static-analysis"
         ],
         "static-analysis": [
-            "psalm --shepherd",
             "phpcpd src Tests",
             "phpmnd ./ --exclude=./phpunit/ --exclude=./vendor/ --non-zero-exit-on-violation --hint",
             "composer-require-checker check ./composer.json",
