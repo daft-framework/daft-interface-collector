@@ -24,7 +24,7 @@
         "sort-packages": true
     },
 	"conflict": {
-		"vimeo/psalm": "<3.10.1"
+		"vimeo/psalm": "<3.11.2"
 	},
     "scripts": {
         "tests": [
