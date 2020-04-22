@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 /**
-* @author SignpostMarv
-*/
+ * @author SignpostMarv
+ */
 
 namespace SignpostMarv\DaftInterfaceCollector\Tests;
 
@@ -15,23 +15,23 @@ use SignpostMarv\DaftInterfaceCollector\StaticMethodCollector;
 class StaticMethodCollectorTest extends Base
 {
 	/**
-	* @var bool
-	*/
+	 * @var bool
+	 */
 	protected $backupGlobals = false;
 
 	/**
-	* @var bool
-	*/
+	 * @var bool
+	 */
 	protected $backupStaticAttributes = false;
 
 	/**
-	* @var bool
-	*/
+	 * @var bool
+	 */
 	protected $runTestInSeparateProcess = false;
 
 	/**
-	* @return Generator<int, array{0:array<class-string, array<string, array<int, class-string>>>, 1:array<int, class-string>, 2:array<int, class-string>, 3:class-string}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:array<class-string, array<string, array<int, class-string>>>, 1:array<int, class-string>, 2:array<int, class-string>, 3:class-string}, mixed, void>
+	 */
 	public function DataProviderCollection() : Generator
 	{
 		yield from [
@@ -60,26 +60,26 @@ class StaticMethodCollectorTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:bool, 1:array<class-string, array<string, array<int, class-string>>>, 2:array<int, class-string>, 3:array<int, class-string>, 4:class-string}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:bool, 1:array<class-string, array<string, array<int, class-string>>>, 2:array<int, class-string>, 3:array<int, class-string>, 4:class-string}, mixed, void>
+	 */
 	public function DataProviderCollectionToggle() : Generator
 	{
 		/**
-		* @var iterable<array<int, scalar|array>>
-		*/
+		 * @var iterable<array<int, scalar|array>>
+		 */
 		$sources = $this->DataProviderCollection();
 
 		foreach ($sources as $args) {
 			/**
-			* @var array{0:true, 1:array<class-string, array<string, array<int, class-string>>>, 2:array<int, class-string>, 3:array<int, class-string>, 4:class-string}
-			*/
+			 * @var array{0:true, 1:array<class-string, array<string, array<int, class-string>>>, 2:array<int, class-string>, 3:array<int, class-string>, 4:class-string}
+			 */
 			$out = array_merge([true], $args);
 
 			yield $out;
 
 			/**
-			* @var array{0:false, 1:array<class-string, array<string, array<int, class-string>>>, 2:array<int, class-string>, 3:array<int, class-string>, 4:class-string}
-			*/
+			 * @var array{0:false, 1:array<class-string, array<string, array<int, class-string>>>, 2:array<int, class-string>, 3:array<int, class-string>, 4:class-string}
+			 */
 			$out = array_merge([false], $args);
 
 			yield $out;
@@ -87,12 +87,12 @@ class StaticMethodCollectorTest extends Base
 	}
 
 	/**
-	* @param array<class-string, array<string, array<int, class-string>>> $staticMethods
-	* @param array<int, class-string> $interfaces
-	* @param class-string ...$implementations
-	*
-	* @dataProvider DataProviderCollectionToggle
-	*/
+	 * @param array<class-string, array<string, array<int, class-string>>> $staticMethods
+	 * @param array<int, class-string> $interfaces
+	 * @param class-string ...$implementations
+	 *
+	 * @dataProvider DataProviderCollectionToggle
+	 */
 	public function test_collection(
 		bool $semiResetting,
 		array $staticMethods,
@@ -119,15 +119,15 @@ class StaticMethodCollectorTest extends Base
 	}
 
 	/**
-	* @param array<class-string, array<string, array<int, class-string>>> $staticMethods
-	* @param array<int, class-string> $interfaces
-	* @param array<int, class-string> $expectedResult
-	* @param string ...$implementations
-	*
-	* @psalm-param class-string ...$implementations
-	*
-	* @dataProvider DataProviderCollectionToggle
-	*/
+	 * @param array<class-string, array<string, array<int, class-string>>> $staticMethods
+	 * @param array<int, class-string> $interfaces
+	 * @param array<int, class-string> $expectedResult
+	 * @param string ...$implementations
+	 *
+	 * @psalm-param class-string ...$implementations
+	 *
+	 * @dataProvider DataProviderCollectionToggle
+	 */
 	public function test_collection_without_resetting_processed_sources(
 		bool $semiResetting,
 		array $staticMethods,

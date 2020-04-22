@@ -14,7 +14,7 @@ interface DaftMiddleware
 	) : ? Response;
 
 	/**
-	* @return array<int, string> URI prefixes
-	*/
+	 * @return array<int, string> URI prefixes
+	 */
 	public static function DaftRouterRoutePrefixExceptions() : array;
 }

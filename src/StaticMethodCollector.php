@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 /**
-* @author SignpostMarv
-*/
+ * @author SignpostMarv
+ */
 
 namespace SignpostMarv\DaftInterfaceCollector;
 
@@ -27,31 +27,31 @@ class StaticMethodCollector
 	const EXPECTED_NUMBER_OF_REQUIRED_PARAMETERS = 0;
 
 	/**
-	* @var array<int, class-string>
-	*/
+	 * @var array<int, class-string>
+	 */
 	protected array $processedSources = [];
 
 	/**
-	* @var array<int, class-string>
-	*/
+	 * @var array<int, class-string>
+	 */
 	protected array $alreadyYielded = [];
 
 	protected bool $autoReset;
 
 	/**
-	* @var array<class-string, array<string, array<int, class-string>>>
-	*/
+	 * @var array<class-string, array<string, array<int, class-string>>>
+	 */
 	private array $staticMethods = [];
 
 	/**
-	* @var array<int, class-string>
-	*/
+	 * @var array<int, class-string>
+	 */
 	private array $interfaces = [];
 
 	/**
-	* @param array<class-string, array<string, array<int, class-string>>> $staticMethods
-	* @param array<int, class-string> $interfaces
-	*/
+	 * @param array<class-string, array<string, array<int, class-string>>> $staticMethods
+	 * @param array<int, class-string> $interfaces
+	 */
 	public function __construct(
 		array $staticMethods,
 		array $interfaces,
@@ -71,10 +71,10 @@ class StaticMethodCollector
 	}
 
 	/**
-	* @param class-string ...$implementations
-	*
-	* @return Generator<int, class-string, mixed, void>
-	*/
+	 * @param class-string ...$implementations
+	 *
+	 * @return Generator<int, class-string, mixed, void>
+	 */
 	public function Collect(string ...$implementations) : Generator
 	{
 		if ($this->autoReset) {
@@ -86,18 +86,18 @@ class StaticMethodCollector
 	}
 
 	/**
-	* @param class-string ...$implementations
-	*
-	* @return Generator<int, class-string, mixed, void>
-	*/
+	 * @param class-string ...$implementations
+	 *
+	 * @return Generator<int, class-string, mixed, void>
+	 */
 	protected function CollectInterfaces(string ...$implementations) : Generator
 	{
 		foreach (
 			array_filter(
 				$implementations,
 				/**
-				* @param class-string $implementation
-				*/
+				 * @param class-string $implementation
+				 */
 				function (string $implementation) : bool {
 					return
 						! static::IsStringInArray($implementation, $this->processedSources);
@@ -111,20 +111,20 @@ class StaticMethodCollector
 	}
 
 	/**
-	* @template T as object
-	*
-	* @param class-string<T> $implementation
-	*
-	* @return Generator<int, class-string<T>, mixed, void>
-	*/
+	 * @template T as object
+	 *
+	 * @param class-string<T> $implementation
+	 *
+	 * @return Generator<int, class-string<T>, mixed, void>
+	 */
 	final protected function CollectInterfacesFromImplementationCheckInterfaces(
 		string $implementation
 	) : Generator {
 		$checking = array_filter(
 			$this->interfaces,
 			/**
-			* @param class-string $interface
-			*/
+			 * @param class-string $interface
+			 */
 			static function (string $interface) use ($implementation) : bool {
 				return static::IsStringA($implementation, $interface);
 			}
@@ -140,10 +140,10 @@ class StaticMethodCollector
 	}
 
 	/**
-	* @param class-string $implementation
-	*
-	* @return Generator<int, class-string, mixed, void>
-	*/
+	 * @param class-string $implementation
+	 *
+	 * @return Generator<int, class-string, mixed, void>
+	 */
 	final protected function CollectInterfacesFromImplementation(string $implementation) : Generator
 	{
 		$interfaces = array_keys($this->staticMethods);
@@ -160,11 +160,11 @@ class StaticMethodCollector
 	}
 
 	/**
-	* @param class-string $implementation
-	* @param array<int, class-string> $types
-	*
-	* @return Generator<int, class-string, mixed, void>
-	*/
+	 * @param class-string $implementation
+	 * @param array<int, class-string> $types
+	 *
+	 * @return Generator<int, class-string, mixed, void>
+	 */
 	final protected function CollectInterfacesFromImplementationTypes(
 		string $implementation,
 		string $method,
@@ -179,8 +179,8 @@ class StaticMethodCollector
 		}
 
 		/**
-		* @var iterable<class-string>
-		*/
+		 * @var iterable<class-string>
+		 */
 		$methodResult = $implementation::$method();
 
 		foreach ($methodResult as $result) {
@@ -198,23 +198,23 @@ class StaticMethodCollector
 	}
 
 	/**
-	* @template T
-	*
-	* @param T::class $implementation
-	* @param array<int, class-string> $interfaces
-	*
-	* @return array<int, T::class>
-	*/
+	 * @template T
+	 *
+	 * @param T::class $implementation
+	 * @param array<int, class-string> $interfaces
+	 *
+	 * @return array<int, T::class>
+	 */
 	final protected function FilterIsA(string $implementation, array $interfaces) : array
 	{
 		/**
-		* @var array<int, T::class>
-		*/
+		 * @var array<int, T::class>
+		 */
 		return array_filter(
 			$interfaces,
 			/**
-			* @param class-string $interface
-			*/
+			 * @param class-string $interface
+			 */
 			static function (string $interface) use ($implementation) : bool {
 				return static::IsStringA($implementation, $interface);
 			}
@@ -222,10 +222,10 @@ class StaticMethodCollector
 	}
 
 	/**
-	* @param array<int, class-string> $interfaces
-	*
-	* @return array<int, class-string>
-	*/
+	 * @param array<int, class-string> $interfaces
+	 *
+	 * @return array<int, class-string>
+	 */
 	final protected function FilterArrayOfInterfacesOrClasses(array $interfaces) : array
 	{
 		return array_filter(
@@ -237,10 +237,10 @@ class StaticMethodCollector
 	}
 
 	/**
-	* @param array<class-string, array<string, array<int, class-string>>> $interfaces
-	*
-	* @return array<class-string, array<string, array<int, class-string>>>
-	*/
+	 * @param array<class-string, array<string, array<int, class-string>>> $interfaces
+	 *
+	 * @return array<class-string, array<string, array<int, class-string>>>
+	 */
 	final protected function FilterArrayOfInterfaceOffsets(array $interfaces) : array
 	{
 		return array_filter(
@@ -253,8 +253,8 @@ class StaticMethodCollector
 	}
 
 	/**
-	* @param class-string $interface
-	*/
+	 * @param class-string $interface
+	 */
 	final protected function MakeMethodFilter(string $interface) : Closure
 	{
 		return function (string $maybe) use ($interface) : bool {
@@ -283,16 +283,16 @@ class StaticMethodCollector
 	}
 
 	/**
-	* @param class-string $interface
-	* @param array<string, array<int, class-string>> $methods
-	*
-	* @return array<class-string, string[]>
-	*/
+	 * @param class-string $interface
+	 * @param array<string, array<int, class-string>> $methods
+	 *
+	 * @return array<class-string, string[]>
+	 */
 	final protected function FilterMethods(string $interface, array $methods) : array
 	{
 		/**
-		* @var array<class-string, string[]>
-		*/
+		 * @var array<class-string, string[]>
+		 */
 		$filteredMethods = $this->FilterNonZeroArray(array_map(
 			[$this, 'FilterArrayOfInterfacesOrClasses'],
 			array_filter(
@@ -306,13 +306,13 @@ class StaticMethodCollector
 	}
 
 	/**
-	* @return array<class-string, array<string, array<int, class-string>>>
-	*/
+	 * @return array<class-string, array<string, array<int, class-string>>>
+	 */
 	final protected function FilterNonZeroArray(array $in) : array
 	{
 		/**
-		* @var array<class-string, array<string, array<int, class-string>>>
-		*/
+		 * @var array<class-string, array<string, array<int, class-string>>>
+		 */
 		return array_filter(
 			$in,
 			static function (array $val) : bool {
@@ -322,17 +322,17 @@ class StaticMethodCollector
 	}
 
 	/**
-	* @param class-string $maybe
-	* @param class-string[] $array
-	*/
+	 * @param class-string $maybe
+	 * @param class-string[] $array
+	 */
 	protected static function IsStringInArray(string $maybe, array $array) : bool
 	{
 		return in_array($maybe, $array, true);
 	}
 
 	/**
-	* @param class-string $thing
-	*/
+	 * @param class-string $thing
+	 */
 	protected static function IsStringA(string $maybe, string $thing) : bool
 	{
 		return is_a($maybe, $thing, true);

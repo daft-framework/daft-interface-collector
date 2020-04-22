@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 /**
-* @author SignpostMarv
-*/
+ * @author SignpostMarv
+ */
 
 namespace SignpostMarv\DaftInterfaceCollector\Tests\Fixtures\StaticMethodCollector;
 
@@ -13,11 +13,11 @@ use SignpostMarv\DaftInterfaceCollector\StaticMethodCollector as Base;
 class PublicCollectInterfacesFromImplementationTypes extends Base
 {
 	/**
-	* @param class-string $implementation
-	* @param array<int, class-string> $types
-	*
-	* @return Generator<int, class-string, mixed, void>
-	*/
+	 * @param class-string $implementation
+	 * @param array<int, class-string> $types
+	 *
+	 * @return Generator<int, class-string, mixed, void>
+	 */
 	public function PublicCollectInterfacesFromImplementationTypes(
 		string $implementation,
 		string $method,

@@ -12,8 +12,8 @@ use SignpostMarv\DaftInterfaceCollector\StaticMethodCollector as Base;
 class SemiResettingStaticMethodCollector extends Base
 {
 	/**
-	* @param class-string ...$implementations
-	*/
+	 * @param class-string ...$implementations
+	 */
 	public function Collect(string ...$implementations) : Generator
 	{
 		if ($this->autoReset) {
