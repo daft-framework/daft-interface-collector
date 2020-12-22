@@ -7,8 +7,10 @@ declare(strict_types=1);
 
 namespace SignpostMarv\DaftInterfaceCollector\Tests;
 
+use function array_merge;
 use Generator;
 use InvalidArgumentException;
+use function iterator_to_array;
 use PHPUnit\Framework\TestCase as Base;
 use SignpostMarv\DaftInterfaceCollector\StaticMethodCollector;
 

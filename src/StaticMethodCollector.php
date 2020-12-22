@@ -7,9 +7,19 @@ declare(strict_types=1);
 
 namespace SignpostMarv\DaftInterfaceCollector;
 
+use function array_filter;
+use const ARRAY_FILTER_USE_KEY;
+use function array_keys;
+use function array_map;
+use function class_exists;
 use Closure;
+use function count;
 use Generator;
+use function in_array;
+use function interface_exists;
 use InvalidArgumentException;
+use function is_a;
+use function method_exists;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionNamedType;
