@@ -222,12 +222,13 @@ class StaticMethodCollector
 	}
 
 	/**
-	 * @param array<int, class-string> $interfaces
+	 * @param array<int, string> $interfaces
 	 *
 	 * @return array<int, class-string>
 	 */
 	final protected function FilterArrayOfInterfacesOrClasses(array $interfaces) : array
 	{
+		/** @var array<int, class-string> */
 		return array_filter(
 			$interfaces,
 			static function (string $maybe) : bool {
