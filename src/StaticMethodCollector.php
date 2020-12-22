@@ -99,8 +99,10 @@ class StaticMethodCollector
 				 * @param class-string $implementation
 				 */
 				function (string $implementation) : bool {
-					return
-						! static::IsStringInArray($implementation, $this->processedSources);
+					return ! static::IsStringInArray(
+						$implementation,
+						$this->processedSources
+					);
 				}
 			) as $implementation
 		) {
