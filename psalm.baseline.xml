@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="4.3.1@2feba22a005a18bf31d4c7b9bdb9252c73897476">
+  <file src="Tests/Fixtures/SemiResettingStaticMethodCollector.php">
+    <LessSpecificImplementedReturnType occurrences="1">
+      <code>Generator</code>
+    </LessSpecificImplementedReturnType>
+  </file>
   <file src="src/StaticMethodCollector.php">
     <MixedMethodCall occurrences="1">
       <code>$implementation::$method()</code>
