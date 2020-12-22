@@ -88,4 +88,6 @@ jobs:
       run: ./vendor/bin/phpunit -vvvv --coverage-clover=phpunit.clover
 
     - name: Upload Coverage
+      env:
+        COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: ./vendor/bin/php-coveralls --coverage_clover=phpunit.clover -v
