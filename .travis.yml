@@ -15,8 +15,5 @@ install:
   - composer update --dry-run roave/security-advisories
 script:
   - composer run static-analysis
-  - ./vendor/bin/psalm --show-info=false --shepherd
-  - ./vendor/bin/phpunit -vvvv --coverage-clover=phpunit.clover
-  - ./vendor/bin/php-coveralls
 matrix:
   fast_finish: true
