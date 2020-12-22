@@ -88,4 +88,4 @@ jobs:
       run: ./vendor/bin/phpunit -vvvv --coverage-clover=phpunit.clover
 
     - name: Upload Coverage
-      uses: ./vendor/bin/php-coveralls --coverage_clover=phpunit.clover -v
+      run: ./vendor/bin/php-coveralls --coverage_clover=phpunit.clover -v
