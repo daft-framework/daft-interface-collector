@@ -8,8 +8,4 @@ namespace SignpostMarv\DaftInterfaceCollector\Tests\Fixtures;
 
 class Login extends Home
 {
-	public static function DaftRouterRoutes() : array
-	{
-		return [];
-	}
 }

@@ -200,9 +200,13 @@ class StaticMethodCollector
 				continue;
 			}
 
-			foreach ($this->FilterIsA($result, $types) as $type) {
+			$filtered = $this->FilterIsA($result, $types);
+
+			while (false !== current($filtered)) {
 				yield $result;
 				$this->alreadyYielded[] = $result;
+
+				next($filtered);
 			}
 
 			yield from $this->CollectInterfaces($result);
