@@ -95,3 +95,43 @@ jobs:
       env:
         COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: ./vendor/bin/php-coveralls --coverage_clover=phpunit.clover -v
+
+  tests-8p0:
+    name: PHP 8.0
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.0'
+        coverage: none
+
+    - uses: actions/checkout@v2
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+
+    - name: Get Composer Cache Directory
+      id: composer-cache
+      run: |
+        echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+    - name: Cache Files
+      uses: actions/cache@v2
+      with:
+        path: |
+          ${{ steps.composer-cache.outputs.dir }}
+          **/.phpunit.result.cache
+          **/.php_cs.cache
+          **/psalm/cache/
+        key: ${{ runner.os }}-phpunit-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-phpunit-
+
+    - name: Install dependencies
+      if: steps.composer-cache.outputs.cache-hit != 'true'
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Run PHPUnit
+      run: ./vendor/bin/phpunit -vvvv
