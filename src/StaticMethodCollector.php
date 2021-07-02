@@ -30,13 +30,13 @@ use Traversable;
 
 class StaticMethodCollector
 {
-	const DEFAULT_INT_ARRAY_FILTER_FLAG = 0;
+	public const DEFAULT_INT_ARRAY_FILTER_FLAG = 0;
 
-	const DEFAULT_BOOL_AUTORESET = true;
+	public const DEFAULT_BOOL_AUTORESET = true;
 
-	const INT_FILTER_NON_EMPTY_ARRAY = 0;
+	public const INT_FILTER_NON_EMPTY_ARRAY = 0;
 
-	const EXPECTED_NUMBER_OF_REQUIRED_PARAMETERS = 0;
+	public const EXPECTED_NUMBER_OF_REQUIRED_PARAMETERS = 0;
 
 	/**
 	 * @var array<int, class-string>
