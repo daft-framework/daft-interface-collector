@@ -2,7 +2,7 @@ Copyright 2020 SignpostMarv
 
 # daft-interface-collector
 [![Coverage Status](https://coveralls.io/repos/github/daft-framework/daft-interface-collector/badge.svg?branch=main)](https://coveralls.io/github/daft-framework/daft-interface-collector?branch=main)
-[![Build Status](https://travis-ci.org/daft-framework/daft-interface-collector.svg?branch=main)](https://travis-ci.org/daft-framework/daft-interface-collector)
+[![Build Status](https://github.com/daft-framework/daft-interface-collector/actions/workflows/php.yml/badge.svg)](https://github.com/daft-framework/daft-interface-collector/actions/workflows/php.yml)
 [![Type Coverage](https://shepherd.dev/github/daft-framework/daft-interface-collector/coverage.svg)](https://shepherd.dev/github/daft-framework/daft-interface-collector)
 
 I needed to abstract out some interface collection code. Because reasons.
