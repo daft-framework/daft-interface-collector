@@ -47,15 +47,15 @@
     },
     "require-dev": {
         "ext-mbstring": "*",
-        "bmitch/churn-php": "^1.5",
-        "infection/infection": "^0.23.0",
+        "bmitch/churn-php": "^1.7",
+        "infection/infection": "^0.26.11",
         "maglnet/composer-require-checker": "^3.3",
-        "php-coveralls/php-coveralls": "^2.4",
+        "php-coveralls/php-coveralls": "^2.5",
         "phpunit/phpunit": "^9.5",
-        "psalm/plugin-phpunit": "^0.16.1",
-        "roave/security-advisories": "dev-master",
+        "psalm/plugin-phpunit": "^0.17.0",
+        "roave/security-advisories": "dev-latest",
         "sebastian/phpcpd": "^6.0",
-        "signpostmarv/php-cs-fixer-config": "^0.21.1",
-        "vimeo/psalm": "^4.8"
+        "signpostmarv/php-cs-fixer-config": "^0.23.0",
+        "vimeo/psalm": "^4.23"
     }
 }
