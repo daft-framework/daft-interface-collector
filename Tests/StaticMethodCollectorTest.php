@@ -124,7 +124,6 @@ class StaticMethodCollectorTest extends Base
 	 * @param array<class-string, array<string, array<int, class-string>>> $staticMethods
 	 * @param array<int, class-string> $interfaces
 	 * @param array<int, class-string> $expectedResult
-	 * @param string ...$implementations
 	 *
 	 * @psalm-param class-string ...$implementations
 	 *
